@@ -7,7 +7,23 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    <Grid Background="White">
+        <Hub>
+            <HubSection x:Name="MainSection" Foreground="Red" Width="1250">
+                <HubSection.Header>
+                    <TextBlock Text="Search" FontWeight ="Bold" Foreground="Red"/>
+                </HubSection.Header>
+            </HubSection>
+            <HubSection x:Name="WatchSection" Width="1250">
+                <HubSection.Header>
+                    <TextBlock Text="Watch" FontWeight="Bold" Foreground="Red"/>
+                </HubSection.Header>
+            </HubSection>
+            <HubSection x:Name="GemSection" Width="1250">
+                <HubSection.Header>
+                    <TextBlock Text="Gems" FontWeight="Bold" Foreground="Red"/>
+                </HubSection.Header>
+            </HubSection>
+        </Hub>
     </Grid>
 </Page>
