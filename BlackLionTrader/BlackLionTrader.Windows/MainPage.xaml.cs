@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI;
+using System.Collections.ObjectModel;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -23,9 +24,19 @@ namespace BlackLionTrader
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private ObservableCollection<string> types = new ObservableCollection<string>();
+
+        public ObservableCollection<string> Types
+        {
+            get { return types; }
+        }
+
         public MainPage()
         {
             this.InitializeComponent();
+            types.Add("Armor");
+            types.Add("Crafting");
+            types.Add("Pets");
         }
 
         private void ItemSearchBox_GotFocus(object sender, RoutedEventArgs e)
