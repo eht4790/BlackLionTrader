@@ -25,6 +25,8 @@ namespace BlackLionTrader
     /// </summary>
     public sealed partial class App : Application
     {
+        public Controller controller = new Controller();
+
 #if WINDOWS_PHONE_APP
         private TransitionCollection transitions;
 #endif
