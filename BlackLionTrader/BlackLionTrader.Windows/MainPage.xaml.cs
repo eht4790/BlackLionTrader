@@ -31,12 +31,29 @@ namespace BlackLionTrader
             get { return types; }
         }
 
+        private ObservableCollection<string> subTypes = new ObservableCollection<string>();
+
+        public ObservableCollection<string> SubTypes
+        {
+            get { return subTypes; }
+        }
+
+        private ObservableCollection<string> rarities = new ObservableCollection<string>();
+
+        public ObservableCollection<string> Rarities
+        {
+            get { return rarities;  }
+        }
+
         public MainPage()
         {
             this.InitializeComponent();
-            types.Add("Armor");
-            types.Add("Crafting");
-            types.Add("Pets");
+
+            // Adjust width of hub sections according to screen resolution
+            var bounds = Window.Current.Bounds;
+            double width = bounds.Width;
+            SearchSection.Width = (Int32)(width * .8);
+            WatchSection.Width = (Int32)(width * .8);
         }
 
         private void ItemSearchBox_GotFocus(object sender, RoutedEventArgs e)
