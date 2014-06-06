@@ -15,6 +15,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Controller.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GemsModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SearchModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)WatchModel.cs" />
