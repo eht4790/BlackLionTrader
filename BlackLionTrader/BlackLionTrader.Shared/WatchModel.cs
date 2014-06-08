@@ -25,7 +25,7 @@ using System.Text;
 
 namespace BlackLionTrader
 {
-    class WatchModel
+    public class WatchModel
     {
     }
 }
