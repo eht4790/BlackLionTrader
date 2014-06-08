@@ -15,7 +15,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)JsonItemDefnitions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JsonItemDefinitions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controller.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GemsModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JsonHelper.cs" />
