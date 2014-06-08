@@ -1,4 +1,9 @@
-﻿using System;
+﻿/// MainPage.xmal.cs
+/// 
+/// The code behind for MainPage.xaml. Contains collections for binding
+/// and even handlers for MainPage UI controls
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -24,22 +29,30 @@ namespace BlackLionTrader
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        private ObservableCollection<string> types = new ObservableCollection<string>();
 
+        private ObservableCollection<string> types = new ObservableCollection<string>();
+        private ObservableCollection<string> subTypes = new ObservableCollection<string>();
+        private ObservableCollection<string> rarities = new ObservableCollection<string>();
+
+        /// <summary>
+        /// A collection of strings with all the various item types
+        /// </summary>
         public ObservableCollection<string> Types
         {
             get { return types; }
         }
 
-        private ObservableCollection<string> subTypes = new ObservableCollection<string>();
-
+        /// <summary>
+        /// A collection of strings with all the subtypes of the currently selected Type
+        /// </summary>
         public ObservableCollection<string> SubTypes
         {
             get { return subTypes; }
         }
 
-        private ObservableCollection<string> rarities = new ObservableCollection<string>();
-
+        /// <summary>
+        /// A collection of strings with all the rarity levels of an item
+        /// </summary>
         public ObservableCollection<string> Rarities
         {
             get { return rarities;  }
@@ -56,6 +69,12 @@ namespace BlackLionTrader
             WatchSection.Width = (Int32)(width * .8);
         }
 
+        /// <summary>
+        /// Event handler for focusing on the searchBox. Removes any default
+        /// text that was in the box.
+        /// </summary>
+        /// <param name="sender">The searchBox in the Search hub section</param>
+        /// <param name="e">Event data</param>
         private void ItemSearchBox_GotFocus(object sender, RoutedEventArgs e)
         {
             TextBox searchBox = (TextBox)sender;
@@ -66,6 +85,28 @@ namespace BlackLionTrader
             }
         }
 
+        /// <summary>
+        /// Event handler for removing focus from the searchBox. Restores default
+        /// text if empty.
+        /// </summary>
+        /// <param name="sender">The searchBox in the Search hub section</param>
+        /// <param name="e">Event data</param>
+        private void ItemSearchBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox searchBox = (TextBox)sender;
+            if (searchBox.Text.Equals(""))
+            {
+                searchBox.Text = "Item Name";
+                searchBox.Foreground = new SolidColorBrush(Colors.Gray);
+            }
+        }
+
+        /// <summary>
+        /// Event handler for focusing on either the MinLvl or MaxLvl TextBoxes.
+        /// Removes any default text that might be there.
+        /// </summary>
+        /// <param name="sender">The MinLvl or MaxLvl TextBox in the Search hub section</param>
+        /// <param name="e">Event data</param>
         private void LevelBox_GotFocus(object sender, RoutedEventArgs e)
         {
             TextBox lvlBox = (TextBox)sender;
@@ -76,16 +117,12 @@ namespace BlackLionTrader
             }
         }
 
-        private void ItemSearchBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            TextBox searchBox = (TextBox)sender;
-            if(searchBox.Text.Equals(""))
-            {
-                searchBox.Text = "Item Name";
-                searchBox.Foreground = new SolidColorBrush(Colors.Gray);
-            }
-        }
-
+        /// <summary>
+        /// Event handler for losing focus on the MinLvl Textbox. Restores default
+        /// text if left empty.
+        /// </summary>
+        /// <param name="sender">The MinLvl Textbox in the Search hub section</param>
+        /// <param name="e">Event data</param>
         private void MinLevelBox_LostFocus(object sender, RoutedEventArgs e)
         {
             TextBox lvlBox = (TextBox)sender;
@@ -96,6 +133,12 @@ namespace BlackLionTrader
             }
         }
 
+        /// <summary>
+        /// Event handler for losing focus on the MaxLvl Textbox. Restores default
+        /// text if left empty.
+        /// </summary>
+        /// <param name="sender">The MaxLvl Textbox in the Search hub section.</param>
+        /// <param name="e">Event data</param>
         private void MaxLevelBox_LostFocus(object sender, RoutedEventArgs e)
         {
             TextBox lvlBox = (TextBox)sender;

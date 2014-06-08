@@ -1,7 +1,7 @@
 ﻿/// JsonItemDefinitions.cs
 ///
 /// Contains all the class definitions for objects from
-/// the Json results
+/// the Json results.
 
 using System;
 using System.Collections.Generic;
@@ -10,17 +10,26 @@ using System.Text;
 namespace BlackLionTrader
 {
 
+    /// <summary>
+    /// Represents a subtype of an existing item type.
+    /// Ex. Type-Armor SubType-Head, Shoulders, Chest, etc...
+    /// </summary>
     public class Subtype
     {
         private int id;
+        private string name;
 
+        /// <summary>
+        /// The unique id of the subtype
+        /// </summary>
         public int ID
         {
             get { return id; }
         }
 
-        private string name;
-
+        /// <summary>
+        /// The name of the subtype
+        /// </summary>
         public string Name
         {
             get { return name; }
@@ -33,24 +42,35 @@ namespace BlackLionTrader
         }
     }
 
+    /// <summary>
+    /// A category of item
+    /// Ex. Armor, Crafting Material, Consumable, etc...
+    /// </summary>
     public class Type
     {
         private int id;
+        private string name;
+        private List<Subtype> subtypes;
 
+        /// <summary>
+        /// The unique idea of the type
+        /// </summary>
         public int ID
         {
             get { return id; }
         }
 
-        private string name;
-
+        /// <summary>
+        /// The name of the type
+        /// </summary>
         public string Name
         {
             get { return name; }
         }
 
-        private List<Subtype> subtypes;
-
+        /// <summary>
+        /// The list of subtypes that belong to this type
+        /// </summary>
         public List<Subtype> Subtypes
         {
             get { return subtypes; }
@@ -64,17 +84,26 @@ namespace BlackLionTrader
         }
     }
 
+    /// <summary>
+    /// The rarity level of the item
+    /// Ex. Basic, Fine, Masterwork, etc...
+    /// </summary>
     public class Rarity
     {
         private int id;
+        private string name;
 
+        /// <summary>
+        /// The unique id of the rarity level
+        /// </summary>
         public int ID
         {
             get { return id; }
         }
 
-        private string name;
-
+        /// <summary>
+        /// The name of the rarity level
+        /// </summary>
         public string Name
         {
             get { return name; }
@@ -87,101 +116,135 @@ namespace BlackLionTrader
         }
     }
 
+    /// <summary>
+    /// A specific item in the game
+    /// Ex. Iron ore, Apothecary's Barbaric Helm, etc...
+    /// </summary>
     public class Item
     {
         private int data_id;
+        private string name;
+        private int rarity;
+        private int restriction_level;
+        private string img;
+        private int type_id;
+        private int sub_type_id;
+        private string price_last_changed;
+        private int max_offer_unit_price;
+        private int min_sale_unit_price;
+        private int offer_availability;
+        private int sale_availability;
+        private int sale_price_change_last_hour;
+        private int offer_price_change_last_hour;
 
+        /// <summary>
+        /// The unique id of the item
+        /// </summary>
         public int DataId
         {
             get { return data_id; }
         }
 
-        private string name;
-
+        /// <summary>
+        /// The name of the item
+        /// </summary>
         public string Name
         {
             get { return name; }
         }
 
-        private int rarity;
-
+        /// <summary>
+        /// The id of the item's rarity level
+        /// </summary>
         public int RarityId
         {
             get { return rarity; }
         }
 
-        private int restriction_level;
-
+        /// <summary>
+        /// The minimum character level required to use this item
+        /// </summary>
         public int RestrictionLevel
         {
             get { return restriction_level; }
         }
 
-        private string img;
-
+        /// <summary>
+        /// A url for an img of the item
+        /// </summary>
         public string Img
         {
             get { return img; }
         }
 
-        private int type_id;
-
+        /// <summary>
+        /// The id of the item's type
+        /// </summary>
         public int TypeId
         {
             get { return type_id; }
         }
 
-        private int sub_type_id;
-
+        /// <summary>
+        /// The id of the item's subtype
+        /// </summary>
         public int SubTypeId
         {
             get { return sub_type_id; }
         }
 
-        private string price_last_changed;
-
+        /// <summary>
+        /// When the price of the item was last changed.
+        /// "YYYY-MM-DD HH:II:SS UTC"
+        /// </summary>
         public string PriceLastChanged
         {
             get { return price_last_changed; }
         }
 
-        private int max_offer_unit_price;
-
+        /// <summary>
+        /// The current highest offer listed for the item
+        /// </summary>
         public int MaxOffer
         {
             get { return max_offer_unit_price; }
         }
 
-        private int min_sale_unit_price;
-
+        /// <summary>
+        /// The current lowest sell price for the item
+        /// </summary>
         public int MinSale
         {
             get { return min_sale_unit_price; }
         }
 
-        private int offer_availability;
-
+        /// <summary>
+        /// The number of buy orders for the item
+        /// </summary>
         public int OfferAvailability
         {
             get { return offer_availability; }
         }
 
-        private int sale_availability;
-
+        /// <summary>
+        /// The number of sell listings for the item
+        /// </summary>
         public int SaleAvailability
         {
             get { return sale_availability; }
         }
 
-        private int sale_price_change_last_hour;
-
+        /// <summary>
+        /// The percentage of change in the sell price since the last hour
+        /// </summary>
         public int SalePriceChange
         {
             get { return sale_price_change_last_hour; }
         }
 
-        private int offer_price_change_last_hour;
-
+        /// <summary>
+        /// The percentage of change in the offer price since the last hour
+        /// </summary>
         public int OfferPriceChange
         {
             get { return offer_price_change_last_hour; }
@@ -207,17 +270,25 @@ namespace BlackLionTrader
         }
     }
 
+    /// <summary>
+    /// Contains the current conversion prices for gems and gold
+    /// </summary>
     public class GemPrice
     {
         private int gem_to_gold;
+        private int gold_to_gem;
 
+        /// <summary>
+        /// The amount of gold 100 gems is worth
+        /// </summary>
         public int GemToGold
         {
             get { return gem_to_gold; }
         }
 
-        private int gold_to_gem;
-
+        /// <summary>
+        /// The amount of gems 100 gold is worth
+        /// </summary>
         public int GoldToGem
         {
             get { return gold_to_gem; }
