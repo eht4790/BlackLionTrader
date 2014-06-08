@@ -1,9 +1,4 @@
-﻿/// JsonHelper.cs
-/// 
-/// Stores the HttpClient object which POSTs to gw2spidy.com
-/// and parses the results.
-/// 
-/*
+﻿/*
  * JsonHelper.cs
  * 
  * Stores the HttpClient object which POSTs to gw2spidy.com
