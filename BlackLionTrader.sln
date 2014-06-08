@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BlackLionTrader", "BlackLionTrader", "{7B59796E-FF9C-4A88-A419-F80E3645EE70}"
+	ProjectSection(SolutionItems) = preProject
+		BlackLionTrader\gpl-3.0.txt = BlackLionTrader\gpl-3.0.txt
+	EndProjectSection
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "BlackLionTrader.Shared", "BlackLionTrader\BlackLionTrader.Shared\BlackLionTrader.Shared.shproj", "{D19A1685-224C-4C23-85EF-41F4AD05E2FC}"
 EndProject
