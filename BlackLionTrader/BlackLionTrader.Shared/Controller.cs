@@ -26,11 +26,12 @@ using System.Text;
 
 namespace BlackLionTrader
 {
-    class Controller
+    public class Controller
     {
         private SearchModel searchModel = new SearchModel();
         private WatchModel watchModel = new WatchModel();
         private GemsModel gemModel = new GemsModel();
+        private JsonHelper jsonHelper = new JsonHelper();
 
         /// <summary>
         /// A reference to the SearchModel the stores the state
@@ -61,6 +62,7 @@ namespace BlackLionTrader
 
         public Controller()
         {
+            jsonHelper.getTypes();
         }
     }
 }
