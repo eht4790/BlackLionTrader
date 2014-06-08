@@ -25,7 +25,7 @@ using System.Text;
 
 namespace BlackLionTrader
 {
-    class GemsModel
+    public class GemsModel
     {
     }
 }

@@ -27,7 +27,7 @@ using System.Threading.Tasks;
 
 namespace BlackLionTrader
 {
-    class SearchModel
+    public class SearchModel
     {
         private List<string> types = new List<string>();
         private List<string> rarities = new List<string>();
