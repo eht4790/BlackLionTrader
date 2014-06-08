@@ -24,6 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using Windows.Data.Json;
 
 namespace BlackLionTrader
 {
@@ -42,13 +43,35 @@ namespace BlackLionTrader
         /// <summary>
         /// Gets the available item types and returns the parsed results.
         /// </summary>
-        public void getTypes()
+        /// <returns>A list of Type possible Type objects. Returns null if the POST request was unsuccessful.</returns>
+        public List<Type> getTypes()
         {
             var result = client.PostAsync("api/v0.9/json/types", null).Result;
             if (result.IsSuccessStatusCode)
             {
-                string resultContent = result.Content.ReadAsStringAsync().Result;
+                List<Type> types = new List<Type>();
+                string resultString = result.Content.ReadAsStringAsync().Result;
+                JsonObject jsonObject = JsonObject.Parse(resultString);
+                JsonArray results = jsonObject["results"].GetArray();
+                foreach(JsonValue val in results)
+                {
+                    JsonObject tempObject = val.GetObject();
+                    List<Subtype> subtypes = new List<Subtype>();
+                    foreach(JsonValue subVal in tempObject["subtype"].GetArray())
+                    {
+                        JsonObject subObject = subVal.GetObject();
+                        subtypes.Add(new Subtype((Int32)subObject["id"].GetNumber(), subObject["name"].GetString()));
+                    }
+                    types.Add(new Type((Int32)tempObject["id"].GetNumber(), tempObject["name"].GetString(), subtypes));
+
+                }
+                return types;
             }
+            else
+            {
+                return null;
+            }
+
         }
 
     }
