@@ -62,7 +62,6 @@ namespace BlackLionTrader
 
         public Controller()
         {
-            jsonHelper.getTypes();
         }
     }
 }
