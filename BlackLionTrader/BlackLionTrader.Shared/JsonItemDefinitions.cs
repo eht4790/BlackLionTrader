@@ -288,6 +288,57 @@ namespace BlackLionTrader
     }
 
     /// <summary>
+    /// Represents a sell/buy listing at a particular price currently on the Trading Post
+    /// </summary>
+    public class ItemListing
+    {
+        string listing_datetime;
+        int unit_price;
+        int quantity;
+        int listings;
+
+        /// <summary>
+        /// The date the listing was put on the Trading Post
+        /// </summary>
+        public string ListingDate
+        {
+            get { return listing_datetime; }
+        }
+
+        /// <summary>
+        /// The price of one item the listing is for
+        /// </summary>
+        public int UnitPrice
+        {
+            get { return unit_price; }
+        }
+
+        /// <summary>
+        /// The amount of the item requested/posted 
+        /// </summary>
+        public int Quantity
+        {
+            get { return quantity; }
+        }
+
+        /// <summary>
+        /// The amount of listings at the same price
+        /// </summary>
+        public int Listings
+        {
+            get { return listings; }
+        }
+
+        public ItemListing(string listingDate, int unitPrice, int quantity, int listings)
+        {
+            this.listing_datetime = listingDate;
+            this.unit_price = UnitPrice;
+            this.quantity = quantity;
+            this.listings = listings;
+        }
+    }
+
+    /// <summary>
     /// Contains the current conversion prices for gems and gold
     /// </summary>
     public class GemPrice
