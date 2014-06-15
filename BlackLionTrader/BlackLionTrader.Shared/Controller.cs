@@ -84,12 +84,57 @@ namespace BlackLionTrader
         }
 
         /// <summary>
-        /// Change the current Type in the searchModel;
+        /// Change the current Type in the searchModel
         /// </summary>
         /// <param name="id">The id of the selected Type</param>
         public void setType(int id)
         {
             searchModel.changeType(id);
+        }
+
+        /// <summary>
+        /// Change the current Rarity in the searchModel
+        /// </summary>
+        /// <param name="id">The id of the selected Rarity</param>
+        public void setRarity(int id)
+        {
+            searchModel.changeRarity(id);
+        }
+
+        /// <summary>
+        /// Change the current Minimum Level in the searchModel
+        /// </summary>
+        /// <param name="lvl">The new minimum level</param>
+        public void setMinLvl(int lvl)
+        {
+            searchModel.changeMinLvl(lvl);
+        }
+
+        /// <summary>
+        /// Gets the MinLvl stored in the SearchModel
+        /// </summary>
+        /// <returns>The minimum level for an item in search results</returns>
+        public int getMinLvl()
+        {
+            return searchModel.MinLvl;
+        }
+
+        /// <summary>
+        /// Gets the MaxLvl stored int he SearchModel
+        /// </summary>
+        /// <returns>The maximum level for an item in search results</returns>
+        public int getMaxLvl()
+        {
+            return searchModel.MaxLvl;
+        }
+
+        /// <summary>
+        /// Change the current Maximum Level in the searchModel
+        /// </summary>
+        /// <param name="lvl">The new maximum level</param>
+        public void setMaxLvl(int lvl)
+        {
+            searchModel.changeMaxLvl(lvl);
         }
     }
 }
