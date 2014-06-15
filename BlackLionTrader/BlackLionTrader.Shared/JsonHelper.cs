@@ -28,7 +28,7 @@ using Windows.Data.Json;
 
 namespace BlackLionTrader
 {
-    class JsonHelper
+    public class JsonHelper
     {
         /// <summary>
         /// The HttpClient that POSTs to gw2spidy.com
@@ -43,7 +43,7 @@ namespace BlackLionTrader
         /// <summary>
         /// Gets the available item types and returns the parsed results.
         /// </summary>
-        /// <returns>A list of Type possible Type objects. Returns null if the POST request was unsuccessful.</returns>
+        /// <returns>A list of possible Type objects. Returns null if the POST request was unsuccessful.</returns>
         public List<Type> getTypes()
         {
             var result = client.PostAsync("api/v0.9/json/types", null).Result;
@@ -66,6 +66,32 @@ namespace BlackLionTrader
 
                 }
                 return types;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Gets the list of rarities and returns the results
+        /// </summary>
+        /// <returns>A list of possible Rarity objects. Returns null if the POST request was unsuccessful.</returns>
+        public List<Rarity> getRarities()
+        {
+            var result = client.PostAsync("api/v0.9/json/rarities", null).Result;
+            if(result.IsSuccessStatusCode)
+            {
+                List<Rarity> rarities = new List<Rarity>();
+                string resultString = result.Content.ReadAsStringAsync().Result;
+                JsonObject jsonObject = JsonObject.Parse(resultString);
+                JsonArray results = jsonObject["results"].GetArray();
+                foreach(JsonValue val in results)
+                {
+                    JsonObject tempObject = val.GetObject();
+                    rarities.Add(new Rarity((Int32)tempObject["id"].GetNumber(), tempObject["name"].GetString()));
+                }
+                return rarities;
             }
             else
             {
