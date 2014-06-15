@@ -49,8 +49,9 @@ namespace BlackLionTrader
     {
 
         private ObservableCollection<string> types = new ObservableCollection<string>();
-        private ObservableCollection<string> subTypes = new ObservableCollection<string>();
+        private ObservableCollection<string> subtypes = new ObservableCollection<string>();
         private ObservableCollection<string> rarities = new ObservableCollection<string>();
+        private App app = Application.Current as App;
 
         /// <summary>
         /// A collection of strings with all the various item types
@@ -65,7 +66,7 @@ namespace BlackLionTrader
         /// </summary>
         public ObservableCollection<string> SubTypes
         {
-            get { return subTypes; }
+            get { return subtypes; }
         }
 
         /// <summary>
@@ -85,6 +86,8 @@ namespace BlackLionTrader
             double width = bounds.Width;
             SearchSection.Width = (Int32)(width * .8);
             WatchSection.Width = (Int32)(width * .8);
+            types = new ObservableCollection<string>(app.controller.getTypesAsString());
+            rarities = new ObservableCollection<string>(app.controller.getRaritiesAsString());
         }
 
         /// <summary>
@@ -164,6 +167,24 @@ namespace BlackLionTrader
             {
                 lvlBox.Text = "Max Lvl";
                 lvlBox.Foreground = new SolidColorBrush(Colors.Gray);
+            }
+        }
+
+        /// <summary>
+        /// Event handler for when a type is selected from TypeCB. Populates the
+        /// SubtypeCB from the possible Subtypes of the selected Type.
+        /// </summary>
+        /// <param name="sender">The TypeCB Combobox in the Search hub section.</param>
+        /// <param name="e">Event data</param>
+        private void TypeCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox typeBox = (ComboBox)sender;
+            app.controller.setType(typeBox.SelectedIndex);
+            List<string> list = app.controller.getSubtypesAsString();
+            subtypes.Clear();
+            foreach(string subtype in list)
+            {
+                subtypes.Add(subtype);
             }
         }
     }
