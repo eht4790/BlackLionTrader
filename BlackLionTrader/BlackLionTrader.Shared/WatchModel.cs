@@ -27,5 +27,11 @@ namespace BlackLionTrader
 {
     public class WatchModel
     {
+        private JsonHelper jsonHelper;
+
+        public WatchModel(JsonHelper jsonHelper)
+        {
+            this.jsonHelper = jsonHelper;
+        }
     }
 }

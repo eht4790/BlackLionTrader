@@ -27,5 +27,12 @@ namespace BlackLionTrader
 {
     public class GemsModel
     {
+        private JsonHelper jsonHelper;
+
+        public GemsModel(JsonHelper jsonHelper)
+        {
+            this.jsonHelper = jsonHelper;
+        }
+
     }
 }
