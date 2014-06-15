@@ -147,10 +147,24 @@ namespace BlackLionTrader
         private void MinLevelBox_LostFocus(object sender, RoutedEventArgs e)
         {
             TextBox lvlBox = (TextBox)sender;
-            if(lvlBox.Text.Equals(""))
+            if (lvlBox.Text.Equals(""))
             {
                 lvlBox.Text = "Min Lvl";
                 lvlBox.Foreground = new SolidColorBrush(Colors.Gray);
+            }
+            else
+            {
+                try
+                {
+                    int lvl = Int32.Parse(lvlBox.Text);
+                    app.controller.setMinLvl(lvl);
+                    lvlBox.Text = app.controller.getMinLvl().ToString();
+                }
+                catch (FormatException)
+                {
+                    lvlBox.Text = "Min Lvl";
+                    lvlBox.Foreground = new SolidColorBrush(Colors.Gray);
+                }
             }
         }
 
@@ -167,6 +181,20 @@ namespace BlackLionTrader
             {
                 lvlBox.Text = "Max Lvl";
                 lvlBox.Foreground = new SolidColorBrush(Colors.Gray);
+            }
+            else
+            {
+                try
+                {
+                    int lvl = Int32.Parse(lvlBox.Text);
+                    app.controller.setMaxLvl(lvl);
+                    lvlBox.Text = app.controller.getMaxLvl().ToString();
+                }
+                catch (FormatException)
+                {
+                    lvlBox.Text = "Max Lvl";
+                    lvlBox.Foreground = new SolidColorBrush(Colors.Gray);
+                }
             }
         }
 
