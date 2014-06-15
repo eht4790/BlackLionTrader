@@ -38,6 +38,8 @@ namespace BlackLionTrader
         private Subtype currentSubtype = null;
         private Rarity currentRarity = null;
 
+        private int minLvl = 1;
+        private int maxLvl = 80;
 
         /// <summary>
         /// A list of available types to filter search results
@@ -61,6 +63,22 @@ namespace BlackLionTrader
         public List<Rarity> Rarities
         {
             get { return rarities; }
+        }
+
+        /// <summary>
+        /// The minimum level of an item to filter search results
+        /// </summary>
+        public int MinLvl
+        {
+            get { return minLvl; }
+        }
+
+        /// <summary>
+        /// The maximum level of an item to filter search results
+        /// </summary>
+        public int MaxLvl
+        {
+            get { return maxLvl; }
         }
 
         public SearchModel(JsonHelper jsonHelper)
@@ -129,6 +147,56 @@ namespace BlackLionTrader
             else
             {
                 currentRarity = rarities[id];
+            }
+        }
+
+        /// <summary>
+        /// Sets the minimum level to the given value. If the given value 
+        /// is less than 1 it defaults to 1. If greater than the max lvl it
+        /// defaults to match the maxLvl;
+        /// </summary>
+        /// <param name="lvl">The desired value for minLvl</param>
+        public void changeMinLvl(int lvl)
+        {
+            if(lvl > 0)
+            {
+                if(lvl <= maxLvl)
+                {
+                    minLvl = lvl;
+                }
+                else
+                {
+                    minLvl = maxLvl;
+                }
+            }
+            else
+            {
+                minLvl = 1;
+            }
+        }
+
+        /// <summary>
+        /// Sets the maximum level to the given value. If the given value 
+        /// is greater than 80 it defaults to 80. If less than the min lvl it
+        /// defaults to match the minLvl;
+        /// </summary>
+        /// <param name="lvl">The desired value for minLvl</param>
+        public void changeMaxLvl(int lvl)
+        {
+            if(lvl <= 80)
+            {
+                if(lvl >= minLvl)
+                {
+                    maxLvl = lvl;
+                }
+                else
+                {
+                    maxLvl = minLvl;
+                }
+            }
+            else
+            {
+                maxLvl = 80;
             }
         }
     }
