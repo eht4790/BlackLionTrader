@@ -51,7 +51,9 @@ namespace BlackLionTrader
         private ObservableCollection<string> types = new ObservableCollection<string>();
         private ObservableCollection<string> subtypes = new ObservableCollection<string>();
         private ObservableCollection<string> rarities = new ObservableCollection<string>();
+        private ObservableCollection<Item> items = new ObservableCollection<Item>();
         private App app = Application.Current as App;
+        private TextBox searchBox;
 
         /// <summary>
         /// A collection of strings with all the various item types
@@ -77,6 +79,14 @@ namespace BlackLionTrader
             get { return rarities;  }
         }
 
+        /// <summary>
+        /// A collection of items that match the search parameters
+        /// </summary>
+        public ObservableCollection<Item> Items
+        {
+            get { return items; }
+        }
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -88,6 +98,16 @@ namespace BlackLionTrader
             WatchSection.Width = (Int32)(width * .8);
             types = new ObservableCollection<string>(app.controller.getTypesAsString());
             rarities = new ObservableCollection<string>(app.controller.getRaritiesAsString());
+        }
+
+        /// <summary>
+        /// Store a reference to the ItemSearchBox once loaded
+        /// </summary>
+        /// <param name="sender">The ItemSearchBox in the Search hub section</param>
+        /// <param name="e">Even data</param>
+        private void ItemSearchBox_Loaded(object sender, RoutedEventArgs e)
+        {
+            searchBox = (TextBox)sender;
         }
 
         /// <summary>
@@ -215,5 +235,20 @@ namespace BlackLionTrader
                 subtypes.Add(subtype);
             }
         }
+
+        private void SearchBtn_Click(object sender, RoutedEventArgs e)
+        {
+            string itemName = searchBox.Text;
+            if(!itemName.Equals("Item Name"))
+            {
+                items.Clear();
+                List<Item> results = app.controller.searchItems(itemName);
+                foreach(Item result in results)
+                {
+                    items.Add(result);
+                }
+            }
+        }
+
     }
 }

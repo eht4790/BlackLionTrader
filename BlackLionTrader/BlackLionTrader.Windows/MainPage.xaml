@@ -322,8 +322,9 @@
                         <!--Row 0 Search Box-->
                         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0, 0, 0, 20">
                             <TextBox x:Name="ItemSearchBox" BorderBrush="Black" Width="400" Margin="0, 5, 0, 5" 
-                                     Foreground="Gray" Text="Item Name" GotFocus="ItemSearchBox_GotFocus" LostFocus="ItemSearchBox_LostFocus" MaxLength="40"/>
-                            <Button x:Name="SearchBtn" Content="Search" Width="94" Height="40" BorderBrush="Black" Foreground="Black" Background="White" />
+                                     Foreground="Gray" Text="Item Name" MaxLength="40"
+                                     GotFocus="ItemSearchBox_GotFocus" LostFocus="ItemSearchBox_LostFocus" Loaded="ItemSearchBox_Loaded"/>
+                            <Button x:Name="SearchBtn" Content="Search" Width="94" Height="40" BorderBrush="Black" Foreground="Black" Background="White" Click="SearchBtn_Click" />
                         </StackPanel>
                         
                         <!--Row 1 Advanced Search Labels-->
