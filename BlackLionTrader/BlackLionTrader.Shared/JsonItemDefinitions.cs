@@ -205,7 +205,7 @@ namespace BlackLionTrader
         /// <summary>
         /// The id of the item's subtype
         /// </summary>
-        public int SubTypeId
+        public int SubtypeId
         {
             get { return sub_type_id; }
         }
