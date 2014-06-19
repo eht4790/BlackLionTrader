@@ -222,7 +222,7 @@ namespace BlackLionTrader
         /// Event handler for when a type is selected from TypeCB. Populates the
         /// SubtypeCB from the possible Subtypes of the selected Type.
         /// </summary>
-        /// <param name="sender">The TypeCB Combobox in the Search hub section.</param>
+        /// <param name="sender">The TypeCB ComboBox in the Search hub section.</param>
         /// <param name="e">Event data</param>
         private void TypeCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -230,10 +230,33 @@ namespace BlackLionTrader
             app.controller.setType(typeBox.SelectedIndex);
             List<string> list = app.controller.getSubtypesAsString();
             subtypes.Clear();
+            app.controller.setSubtype(-1);
             foreach(string subtype in list)
             {
                 subtypes.Add(subtype);
             }
+        }
+
+        /// <summary>
+        /// Event handler for when a subtype is selected from SubtypeCB
+        /// </summary>
+        /// <param name="sender">The SubtypeCB ComboBox in the Search hub section</param>
+        /// <param name="e">Event data</param>
+        private void SubTypeCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox subtypeBox = (ComboBox)sender;
+            app.controller.setSubtype(subtypeBox.SelectedIndex);
+        }
+
+        /// <summary>
+        /// Event handler for when a rarity is selected from RarityCB
+        /// </summary>
+        /// <param name="sender">The RarityCB ComboBox in the Search hub section</param>
+        /// <param name="e">Event data</param>
+        private void RarityCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox rarityBox = (ComboBox)sender;
+            app.controller.setRarity(rarityBox.SelectedIndex);
         }
 
         private void SearchBtn_Click(object sender, RoutedEventArgs e)
@@ -249,6 +272,5 @@ namespace BlackLionTrader
                 }
             }
         }
-
     }
 }
