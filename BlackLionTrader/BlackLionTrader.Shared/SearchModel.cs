@@ -23,6 +23,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq;
 
 
 namespace BlackLionTrader
@@ -33,6 +34,7 @@ namespace BlackLionTrader
         private List<Type> types = new List<Type>();
         private List<Subtype> subtypes = new List<Subtype>();
         private List<Rarity> rarities = new List<Rarity>();
+        private List<Item> searchResults = new List<Item>();
 
         private Type currentType = null;
         private Subtype currentSubtype = null;
@@ -63,6 +65,14 @@ namespace BlackLionTrader
         public List<Rarity> Rarities
         {
             get { return rarities; }
+        }
+
+        /// <summary>
+        /// A list of items that match the search parameters
+        /// </summary>
+        public List<Item> SearchResults
+        {
+            get { return searchResults; }
         }
 
         /// <summary>
@@ -198,6 +208,48 @@ namespace BlackLionTrader
             {
                 maxLvl = 80;
             }
+        }
+
+        /// <summary>
+        /// Sends searches for items with the given name, filters the results
+        /// according to search options, and store the results in searchResults
+        /// </summary>
+        /// <param name="itemName">The item name being searched</param>
+        public void search(string itemName)
+        {
+            searchResults.Clear();
+            List<Item> results = jsonHelper.searchItem(itemName);
+            var linqResults = from item in results
+                              where item.RestrictionLevel >= minLvl &&
+                                    item.RestrictionLevel <= maxLvl
+                              select item;
+
+            if(currentType != null)
+            {
+                linqResults = linqResults.Where(item => item.TypeId == currentType.ID);
+            }
+
+            if(currentSubtype != null)
+            {
+                linqResults = linqResults.Where(item => item.SubtypeId == currentSubtype.ID);
+            }
+
+            if(currentRarity != null)
+            {
+                linqResults = linqResults.Where(item => item.RarityId == currentRarity.ID);
+            }
+
+            searchResults = linqResults.ToList();
+
+        }
+
+        /// <summary>
+        /// Gets the current list of items in the search results
+        /// </summary>
+        /// <returns>List of item objects that match current search</returns>
+        public List<Item> getSearchResults()
+        {
+            return SearchResults;
         }
     }
 }

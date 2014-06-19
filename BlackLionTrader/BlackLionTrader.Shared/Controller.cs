@@ -93,6 +93,15 @@ namespace BlackLionTrader
         }
 
         /// <summary>
+        /// Change the current Subtype in the searchModel
+        /// </summary>
+        /// <param name="id">The id of the selected Subtype</param>
+        public void setSubtype(int id)
+        {
+            searchModel.changeSubtype(id);
+        }
+
+        /// <summary>
         /// Change the current Rarity in the searchModel
         /// </summary>
         /// <param name="id">The id of the selected Rarity</param>
@@ -135,6 +144,12 @@ namespace BlackLionTrader
         public void setMaxLvl(int lvl)
         {
             searchModel.changeMaxLvl(lvl);
+        }
+
+        public List<Item> searchItems(string itemName)
+        {
+            searchModel.search(itemName);
+            return searchModel.getSearchResults();
         }
     }
 }
