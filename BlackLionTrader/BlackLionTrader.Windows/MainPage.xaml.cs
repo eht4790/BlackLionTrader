@@ -51,7 +51,7 @@ namespace BlackLionTrader
         private ObservableCollection<string> types = new ObservableCollection<string>();
         private ObservableCollection<string> subtypes = new ObservableCollection<string>();
         private ObservableCollection<string> rarities = new ObservableCollection<string>();
-        private ObservableCollection<Item> items = new ObservableCollection<Item>();
+        private ObservableCollection<DisplayItem> items = new ObservableCollection<DisplayItem>();
         private App app = Application.Current as App;
         private TextBox searchBox;
 
@@ -82,7 +82,7 @@ namespace BlackLionTrader
         /// <summary>
         /// A collection of items that match the search parameters
         /// </summary>
-        public ObservableCollection<Item> Items
+        public ObservableCollection<DisplayItem> Items
         {
             get { return items; }
         }
@@ -184,6 +184,7 @@ namespace BlackLionTrader
                 {
                     lvlBox.Text = "Min Lvl";
                     lvlBox.Foreground = new SolidColorBrush(Colors.Gray);
+                    app.controller.setMinLvl(0);
                 }
             }
         }
@@ -214,6 +215,7 @@ namespace BlackLionTrader
                 {
                     lvlBox.Text = "Max Lvl";
                     lvlBox.Foreground = new SolidColorBrush(Colors.Gray);
+                    app.controller.setMaxLvl(80);
                 }
             }
         }
@@ -265,8 +267,8 @@ namespace BlackLionTrader
             if(!itemName.Equals("Item Name"))
             {
                 items.Clear();
-                List<Item> results = app.controller.searchItems(itemName);
-                foreach(Item result in results)
+                List<DisplayItem> results = app.controller.searchItems(itemName);
+                foreach(DisplayItem result in results)
                 {
                     items.Add(result);
                 }

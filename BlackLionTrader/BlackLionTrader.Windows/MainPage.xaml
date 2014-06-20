@@ -346,6 +346,13 @@
                         </StackPanel>
                         
                         <!--Row 3 Items List-->
+                        <ListBox x:Name="ItemsListBox" Grid.Row="3" VerticalAlignment="Top">
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Vertical" />
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                        </ListBox>
                     </Grid>
                 </DataTemplate>
             </HubSection>
