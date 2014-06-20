@@ -32,6 +32,7 @@ namespace BlackLionTrader
     {
         private JsonHelper jsonHelper;
         private List<Type> types = new List<Type>();
+        private Dictionary<int, Type> typesDict = new Dictionary<int, Type>();
         private List<Subtype> subtypes = new List<Subtype>();
         private List<Rarity> rarities = new List<Rarity>();
         private List<Item> searchResults = new List<Item>();
@@ -40,7 +41,7 @@ namespace BlackLionTrader
         private Subtype currentSubtype = null;
         private Rarity currentRarity = null;
 
-        private int minLvl = 1;
+        private int minLvl = 0;
         private int maxLvl = 80;
 
         /// <summary>
@@ -103,6 +104,10 @@ namespace BlackLionTrader
         private void setup()
         {
             types = jsonHelper.getTypes();
+            foreach(Type type in types)
+            {
+                typesDict.Add(type.ID, type);
+            }
             rarities = jsonHelper.getRarities();
         }
 
@@ -244,12 +249,36 @@ namespace BlackLionTrader
         }
 
         /// <summary>
-        /// Gets the current list of items in the search results
+        /// Gets a list of DisplayItems from the searchResults list
         /// </summary>
-        /// <returns>List of item objects that match current search</returns>
-        public List<Item> getSearchResults()
+        /// <returns>List of DisplayItem objects that match current search</returns>
+        public List<DisplayItem> getDisplayItems()
         {
-            return SearchResults;
+            List<DisplayItem> displayItems = new List<DisplayItem>();
+            foreach(Item item in searchResults)
+            {
+                Type itemType = typesDict[item.TypeId];
+                string typeString = "";
+                if(itemType.Subtypes.Count < 1)
+                {
+                    typeString = itemType.Name;
+                }
+                else
+                {
+                    typeString = itemType.Name + " // " + itemType.Subtypes[item.SubtypeId].Name;
+                }
+                displayItems.Add(new DisplayItem(item.Img,
+                                                 item.Name,
+                                                 item.RestrictionLevel,
+                                                 rarities[item.RarityId].Name,
+                                                 typeString,
+                                                 item.SaleAvailability,
+                                                 item.OfferAvailability,
+                                                 item.MinSale,
+                                                 item.MaxOffer
+                                                 ));
+            }
+            return displayItems;
         }
     }
 }

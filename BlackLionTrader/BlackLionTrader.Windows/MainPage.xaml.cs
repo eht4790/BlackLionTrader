@@ -104,10 +104,22 @@ namespace BlackLionTrader
         /// Store a reference to the ItemSearchBox once loaded
         /// </summary>
         /// <param name="sender">The ItemSearchBox in the Search hub section</param>
-        /// <param name="e">Even data</param>
+        /// <param name="e">Event data</param>
         private void ItemSearchBox_Loaded(object sender, RoutedEventArgs e)
         {
             searchBox = (TextBox)sender;
+        }
+
+        /// <summary>
+        /// Sets the width of the itemsListBox on load
+        /// </summary>
+        /// <param name="sender">The ItemsListBox in the Search hub section</param>
+        /// <param name="e">Event Data</param>
+        private void ItemsListBox_Loaded(object sender, RoutedEventArgs e)
+        {
+            ListBox itemsListBox = (ListBox)sender;
+            double width = Window.Current.Bounds.Width;
+            itemsListBox.Width = (Int32)(width * .8);
         }
 
         /// <summary>

@@ -346,12 +346,17 @@
                         </StackPanel>
                         
                         <!--Row 3 Items List-->
-                        <ListBox x:Name="ItemsListBox" Grid.Row="3" VerticalAlignment="Top">
+                        <ListBox x:Name="ItemsListBox" Grid.Row="3"  Margin="0, 80, 0, 80" VerticalAlignment="Top" ItemsSource="{Binding Items}" Loaded="ItemsListBox_Loaded">
                             <ListBox.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <StackPanel Orientation="Vertical" />
                                 </ItemsPanelTemplate>
                             </ListBox.ItemsPanel>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Image Width="40" Height="40" Source="{Binding Img}"></Image>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
                         </ListBox>
                     </Grid>
                 </DataTemplate>

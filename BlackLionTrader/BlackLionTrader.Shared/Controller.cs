@@ -146,10 +146,10 @@ namespace BlackLionTrader
             searchModel.changeMaxLvl(lvl);
         }
 
-        public List<Item> searchItems(string itemName)
+        public List<DisplayItem> searchItems(string itemName)
         {
             searchModel.search(itemName);
-            return searchModel.getSearchResults();
+            return searchModel.getDisplayItems();
         }
     }
 }
