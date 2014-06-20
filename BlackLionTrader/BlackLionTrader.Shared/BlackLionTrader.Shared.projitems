@@ -15,11 +15,17 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)DisplayItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JsonItemDefinitions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controller.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GemsModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JsonHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SearchModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)WatchModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)SharedAssets\copper.png" />
+    <Content Include="$(MSBuildThisFileDirectory)SharedAssets\gold.png" />
+    <Content Include="$(MSBuildThisFileDirectory)SharedAssets\silver.png" />
   </ItemGroup>
 </Project>
