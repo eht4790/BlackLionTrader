@@ -9,6 +9,9 @@
             <SolidColorBrush x:Key="ComboBoxItemSelectedBackgroundThemeBrush" Color="Red" />
             <SolidColorBrush x:Key="ComboBoxItemSelectedPointerOverBackgroundThemeBrush" Color="Red" />
             <SolidColorBrush x:Key="TextSelectionHighlightColorThemeBrush" Color="Red"/>
+            <SolidColorBrush x:Key="ListBoxItemPressedBackgroundThemeBrush" Color="Red" />
+            <SolidColorBrush x:Key="ListBoxItemSelectedBackgroundThemeBrush" Color="Red" />
+            <SolidColorBrush x:Key="ListBoxItemSelectedPointerOverBackgroundThemeBrush" Color="Red" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>
