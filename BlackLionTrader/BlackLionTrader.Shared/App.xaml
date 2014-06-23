@@ -12,6 +12,7 @@
             <SolidColorBrush x:Key="ListBoxItemPressedBackgroundThemeBrush" Color="Red" />
             <SolidColorBrush x:Key="ListBoxItemSelectedBackgroundThemeBrush" Color="Red" />
             <SolidColorBrush x:Key="ListBoxItemSelectedPointerOverBackgroundThemeBrush" Color="Red" />
+            <SolidColorBrush x:Key="ListBoxFocusBackgroundThemeBrush"  Color="#FFFFFF" Opacity=".75"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
