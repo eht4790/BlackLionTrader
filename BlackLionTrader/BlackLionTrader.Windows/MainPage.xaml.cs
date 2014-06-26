@@ -54,6 +54,7 @@ namespace BlackLionTrader
         private ObservableCollection<DisplayItem> items = new ObservableCollection<DisplayItem>();
         private App app = Application.Current as App;
         private TextBox searchBox;
+        private ListBox itemsListBox;
 
         /// <summary>
         /// A collection of strings with all the various item types
@@ -94,8 +95,9 @@ namespace BlackLionTrader
             // Adjust width of hub sections according to screen resolution
             var bounds = Window.Current.Bounds;
             double width = bounds.Width;
-            SearchSection.Width = (Int32)(width * .8);
-            WatchSection.Width = (Int32)(width * .8);
+            SearchSection.Width = (Int32)(width * .9);
+            WatchSection.Width = (Int32)(width * .9);
+            GemSection.Width = width;
             types = new ObservableCollection<string>(app.controller.getTypesAsString());
             rarities = new ObservableCollection<string>(app.controller.getRaritiesAsString());
         }
@@ -117,9 +119,21 @@ namespace BlackLionTrader
         /// <param name="e">Event Data</param>
         private void ItemsListBox_Loaded(object sender, RoutedEventArgs e)
         {
-            ListBox itemsListBox = (ListBox)sender;
+            itemsListBox = (ListBox)sender;
             double width = Window.Current.Bounds.Width;
-            itemsListBox.Width = (Int32)(width * .8);
+            itemsListBox.Width = (Int32)(width * .9);
+        }
+
+        /// <summary>
+        /// Sets the width of the Grid in itemsListBox on load
+        /// </summary>
+        /// <param name="sender">The Grid in ItemsListBox in the Search hub section</param>
+        /// <param name="e">Event Data</param>
+        private void ItemsListBoxGrid_Loaded(object sender, RoutedEventArgs e)
+        {
+            Grid grid = (Grid)sender;
+            double width = Window.Current.Bounds.Width;
+            grid.Width = (Int32)(width * 9);
         }
 
         /// <summary>
@@ -273,6 +287,13 @@ namespace BlackLionTrader
             app.controller.setRarity(rarityBox.SelectedIndex);
         }
 
+        /// <summary>
+        /// Gets the search text from ItemSearchBox and passes to the controller
+        /// for a POST request. Stores the results in items List and displays
+        /// them in the ItemsListBox.
+        /// </summary>
+        /// <param name="sender">The SearchBtn Button in the Search hub section</param>
+        /// <param name="e">Event Data</param>
         private void SearchBtn_Click(object sender, RoutedEventArgs e)
         {
             string itemName = searchBox.Text;
