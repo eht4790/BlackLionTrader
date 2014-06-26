@@ -271,16 +271,7 @@ namespace BlackLionTrader
                 {
                     typeString = itemType.Name + " // " + itemType.Subtypes[item.SubtypeId].Name;
                 }
-                displayItems.Add(new DisplayItem(item.Img,
-                                                 item.Name,
-                                                 item.RestrictionLevel,
-                                                 rarities[item.RarityId].Name,
-                                                 typeString,
-                                                 item.SaleAvailability,
-                                                 item.OfferAvailability,
-                                                 item.MinSale,
-                                                 item.MaxOffer
-                                                 ));
+                displayItems.Add(new DisplayItem(item));
             }
             return displayItems;
         }

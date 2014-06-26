@@ -30,7 +30,7 @@ namespace BlackLionTrader
         private string img;
         private string name;
         private int level;
-        private string rarity;
+        private int rarity;
         private string type;
         private int supply;
         private int demand;
@@ -84,7 +84,7 @@ namespace BlackLionTrader
         /// <summary>
         /// The name of the rarity of the item
         /// </summary>
-        public string Rarity
+        public int Rarity
         {
             get { return rarity; }
         }
@@ -295,31 +295,23 @@ namespace BlackLionTrader
             get { return marginGoldImg; }
         }
 
-        public DisplayItem(string img,
-                           string name,
-                           int level,
-                           string rarity,
-                           string type,
-                           int supply,
-                           int demand,
-                           int minSaleOffer,
-                           int maxBuyOffer)
+        public DisplayItem(Item item)
         {
-            this.img = img;
-            if(name.Length > 34)
+            this.img = item.Img;
+            if(item.Name.Length > 34)
             {
-                this.name = name.Substring(0, 31) + "...";
+                this.name = item.Name.Substring(0, 31) + "...";
             }
             else
             {
-                this.name = name.PadRight(34);
+                this.name = item.Name.PadRight(34);
             }
-            this.level = level;
-            this.rarity = rarity;
-            this.type = type;
-            this.supply = supply;
-            this.demand = demand;
-            this.minSaleOffer = minSaleOffer.ToString();
+            this.name = item.Name;
+            this.level = item.RestrictionLevel;
+            this.rarity = item.RarityId;
+            this.supply = item.SaleAvailability;
+            this.demand = item.OfferAvailability;
+            this.minSaleOffer = item.MinSale.ToString();
 
             // Divide up minSaleOffer price
             if(this.minSaleOffer.Length < 3)
@@ -357,7 +349,7 @@ namespace BlackLionTrader
             }
 
             // Divide up maxBuyOffer price
-            this.maxBuyOffer = maxBuyOffer.ToString();
+            this.maxBuyOffer = item.MaxOffer.ToString();
             if (this.maxBuyOffer.Length < 3)
             {
                 maxBuyCopper = this.maxBuyOffer;
@@ -393,7 +385,7 @@ namespace BlackLionTrader
             }
 
             // Divide up margin price
-            this.marginInt = (int)(minSaleOffer * .85) - maxBuyOffer;
+            this.marginInt = (int)(item.MinSale * .85) - item.MaxOffer;
             if (marginInt < 0)
             {
                 this.margin = marginInt.ToString().Substring(1);
