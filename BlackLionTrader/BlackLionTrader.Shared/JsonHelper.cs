@@ -46,29 +46,39 @@ namespace BlackLionTrader
         /// <returns>A list of possible Type objects. Returns null if the POST request was unsuccessful.</returns>
         public List<Type> getTypes()
         {
-            var result = client.PostAsync("api/v0.9/json/types", null).Result;
-            if (result.IsSuccessStatusCode)
+            try
             {
-                List<Type> types = new List<Type>();
-                string resultString = result.Content.ReadAsStringAsync().Result;
-                JsonObject jsonObject = JsonObject.Parse(resultString);
-                JsonArray results = jsonObject["results"].GetArray();
-                foreach(JsonValue val in results)
-                {
-                    JsonObject tempObject = val.GetObject();
-                    List<Subtype> subtypes = new List<Subtype>();
-                    foreach(JsonValue subVal in tempObject["subtypes"].GetArray())
-                    {
-                        JsonObject subObject = subVal.GetObject();
-                        subtypes.Add(new Subtype((Int32)subObject["id"].GetNumber(), subObject["name"].GetString()));
-                    }
-                    types.Add(new Type((Int32)tempObject["id"].GetNumber(), tempObject["name"].GetString(), subtypes));
+                var result = client.PostAsync("api/v0.9/json/types", null).Result;
 
+                if (result.IsSuccessStatusCode)
+                {
+                    List<Type> types = new List<Type>();
+                    string resultString = result.Content.ReadAsStringAsync().Result;
+                    JsonObject jsonObject = JsonObject.Parse(resultString);
+                    JsonArray results = jsonObject["results"].GetArray();
+                    foreach (JsonValue val in results)
+                    {
+                        JsonObject tempObject = val.GetObject();
+                        List<Subtype> subtypes = new List<Subtype>();
+                        foreach (JsonValue subVal in tempObject["subtypes"].GetArray())
+                        {
+                            JsonObject subObject = subVal.GetObject();
+                            subtypes.Add(new Subtype((Int32)subObject["id"].GetNumber(), subObject["name"].GetString()));
+                        }
+                        types.Add(new Type((Int32)tempObject["id"].GetNumber(), tempObject["name"].GetString(), subtypes));
+
+                    }
+                    return types;
                 }
-                return types;
+                else
+                {
+                    return null;
+                }
             }
-            else
+            catch(AggregateException e)
             {
+                //TODO: Message Dialog to user  
+                App.Current.Exit();
                 return null;
             }
         }
@@ -79,22 +89,31 @@ namespace BlackLionTrader
         /// <returns>A list of possible Rarity objects. Returns null if the POST request was unsuccessful.</returns>
         public List<Rarity> getRarities()
         {
-            var result = client.PostAsync("api/v0.9/json/rarities", null).Result;
-            if(result.IsSuccessStatusCode)
+            try
             {
-                List<Rarity> rarities = new List<Rarity>();
-                string resultString = result.Content.ReadAsStringAsync().Result;
-                JsonObject jsonObject = JsonObject.Parse(resultString);
-                JsonArray results = jsonObject["results"].GetArray();
-                foreach(JsonValue val in results)
+                var result = client.PostAsync("api/v0.9/json/rarities", null).Result;
+                if (result.IsSuccessStatusCode)
                 {
-                    JsonObject tempObject = val.GetObject();
-                    rarities.Add(new Rarity((Int32)tempObject["id"].GetNumber(), tempObject["name"].GetString()));
+                    List<Rarity> rarities = new List<Rarity>();
+                    string resultString = result.Content.ReadAsStringAsync().Result;
+                    JsonObject jsonObject = JsonObject.Parse(resultString);
+                    JsonArray results = jsonObject["results"].GetArray();
+                    foreach (JsonValue val in results)
+                    {
+                        JsonObject tempObject = val.GetObject();
+                        rarities.Add(new Rarity((Int32)tempObject["id"].GetNumber(), tempObject["name"].GetString()));
+                    }
+                    return rarities;
                 }
-                return rarities;
+                else
+                {
+                    return null;
+                }
             }
-            else
+            catch(AggregateException e)
             {
+                //TODO: Message Dialog to user  
+                App.Current.Exit();
                 return null;
             }
         }
@@ -106,31 +125,40 @@ namespace BlackLionTrader
         /// <returns>An Item object with all it's information. Returns null if POST request was unsuccessful.</returns>
         public Item getItem(int id)
         {
-            var result = client.PostAsync("api/v0.9/json/item/" + id, null).Result;
-            if(result.IsSuccessStatusCode)
+            try
             {
-                string resultString = result.Content.ReadAsStringAsync().Result;
-                JsonObject jsonObject = JsonObject.Parse(resultString);
-                JsonObject itemObject = jsonObject["result"].GetObject();
-                Item item = new Item((Int32)itemObject["data_id"].GetNumber(),
-                                     itemObject["name"].GetString(),
-                                     (Int32)itemObject["rarity"].GetNumber(),
-                                     (Int32)itemObject["restriction_level"].GetNumber(),
-                                     itemObject["img"].GetString(),
-                                     (Int32)itemObject["type_id"].GetNumber(),
-                                     (Int32)itemObject["sub_type_id"].GetNumber(),
-                                     itemObject["price_last_changed"].GetString(),
-                                     (Int32)itemObject["max_offer_unit_price"].GetNumber(),
-                                     (Int32)itemObject["min_sale_unit_price"].GetNumber(),
-                                     (Int32)itemObject["offer_availability"].GetNumber(),
-                                     (Int32)itemObject["sale_availability"].GetNumber(),
-                                     (Int32)itemObject["sale_price_change_last_hour"].GetNumber(),
-                                     (Int32)itemObject["offer_price_change_last_hour"].GetNumber()
-                                     );
-                return item;
+                var result = client.PostAsync("api/v0.9/json/item/" + id, null).Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    string resultString = result.Content.ReadAsStringAsync().Result;
+                    JsonObject jsonObject = JsonObject.Parse(resultString);
+                    JsonObject itemObject = jsonObject["result"].GetObject();
+                    Item item = new Item((Int32)itemObject["data_id"].GetNumber(),
+                                         itemObject["name"].GetString(),
+                                         (Int32)itemObject["rarity"].GetNumber(),
+                                         (Int32)itemObject["restriction_level"].GetNumber(),
+                                         itemObject["img"].GetString(),
+                                         (Int32)itemObject["type_id"].GetNumber(),
+                                         (Int32)itemObject["sub_type_id"].GetNumber(),
+                                         itemObject["price_last_changed"].GetString(),
+                                         (Int32)itemObject["max_offer_unit_price"].GetNumber(),
+                                         (Int32)itemObject["min_sale_unit_price"].GetNumber(),
+                                         (Int32)itemObject["offer_availability"].GetNumber(),
+                                         (Int32)itemObject["sale_availability"].GetNumber(),
+                                         (Int32)itemObject["sale_price_change_last_hour"].GetNumber(),
+                                         (Int32)itemObject["offer_price_change_last_hour"].GetNumber()
+                                         );
+                    return item;
+                }
+                else
+                {
+                    return null;
+                }
             }
-            else
+            catch(AggregateException e)
             {
+                //TODO: Message Dialog to user  
+                App.Current.Exit();
                 return null;
             }
         }
@@ -142,49 +170,58 @@ namespace BlackLionTrader
         /// <returns>The list of possible items</returns>
         public List<Item> searchItem(string searchString)
         {
-            int currentPage = 1;
-            int totalPages = 1;
-            List<Item> items = new List<Item>();
-            do
+            try
             {
-                var result = client.PostAsync("api/v0.9/json/item-search/" + searchString + "/" + currentPage, null).Result;
-                if (result.IsSuccessStatusCode)
+                int currentPage = 1;
+                int totalPages = 1;
+                List<Item> items = new List<Item>();
+                do
                 {
-                    string resultString = result.Content.ReadAsStringAsync().Result;
-                    JsonObject resultObject = JsonObject.Parse(resultString);
-                    if(currentPage == 1)
+                    var result = client.PostAsync("api/v0.9/json/item-search/" + searchString + "/" + currentPage, null).Result;
+                    if (result.IsSuccessStatusCode)
                     {
-                        totalPages = (Int32)resultObject["last_page"].GetNumber();
+                        string resultString = result.Content.ReadAsStringAsync().Result;
+                        JsonObject resultObject = JsonObject.Parse(resultString);
+                        if (currentPage == 1)
+                        {
+                            totalPages = (Int32)resultObject["last_page"].GetNumber();
+                        }
+                        JsonArray resultsArray = resultObject["results"].GetArray();
+                        foreach (JsonValue itemVal in resultsArray)
+                        {
+                            JsonObject itemObject = itemVal.GetObject();
+                            Item item = new Item((Int32)itemObject["data_id"].GetNumber(),
+                                                    itemObject["name"].GetString(),
+                                                (Int32)itemObject["rarity"].GetNumber(),
+                                                (Int32)itemObject["restriction_level"].GetNumber(),
+                                                itemObject["img"].GetString(),
+                                                (Int32)itemObject["type_id"].GetNumber(),
+                                                (Int32)itemObject["sub_type_id"].GetNumber(),
+                                                itemObject["price_last_changed"].GetString(),
+                                                (Int32)itemObject["max_offer_unit_price"].GetNumber(),
+                                                (Int32)itemObject["min_sale_unit_price"].GetNumber(),
+                                                (Int32)itemObject["offer_availability"].GetNumber(),
+                                                (Int32)itemObject["sale_availability"].GetNumber(),
+                                                (Int32)itemObject["sale_price_change_last_hour"].GetNumber(),
+                                                (Int32)itemObject["offer_price_change_last_hour"].GetNumber()
+                            );
+                            items.Add(item);
+                        }
                     }
-                    JsonArray resultsArray = resultObject["results"].GetArray();
-                    foreach(JsonValue itemVal in resultsArray)
+                    else
                     {
-                        JsonObject itemObject = itemVal.GetObject();
-                        Item item = new Item((Int32)itemObject["data_id"].GetNumber(),
-                                             itemObject["name"].GetString(),
-                                            (Int32)itemObject["rarity"].GetNumber(),
-                                            (Int32)itemObject["restriction_level"].GetNumber(),
-                                            itemObject["img"].GetString(),
-                                            (Int32)itemObject["type_id"].GetNumber(),
-                                            (Int32)itemObject["sub_type_id"].GetNumber(),
-                                            itemObject["price_last_changed"].GetString(),
-                                            (Int32)itemObject["max_offer_unit_price"].GetNumber(),
-                                            (Int32)itemObject["min_sale_unit_price"].GetNumber(),
-                                            (Int32)itemObject["offer_availability"].GetNumber(),
-                                            (Int32)itemObject["sale_availability"].GetNumber(),
-                                            (Int32)itemObject["sale_price_change_last_hour"].GetNumber(),
-                                            (Int32)itemObject["offer_price_change_last_hour"].GetNumber()
-                        );
-                        items.Add(item);
+                        return null;
                     }
-                }
-                else
-                {
-                    return null;
-                }
-                currentPage++;
-            } while (currentPage <= totalPages);
-            return items;
+                    currentPage++;
+                } while (currentPage <= totalPages);
+                return items;
+            }
+            catch(AggregateException e)
+            {
+                //TODO: Message Dialog to user  
+                App.Current.Exit();
+                return null;
+            }
         }
 
         /// <summary>
@@ -193,17 +230,26 @@ namespace BlackLionTrader
         /// <returns>A GemPrice object. Returns null if POST request was unsuccessful</returns>
         public GemPrice getGemPrices()
         {
-            var result = client.PostAsync("api/v0.9/json/gem-price", null).Result;
-            if(result.IsSuccessStatusCode)
+            try
             {
-                string resultString = result.Content.ReadAsStringAsync().Result;
-                JsonObject jsonObject = JsonObject.Parse(resultString);
-                JsonObject gemObject = jsonObject["result"].GetObject();
-                GemPrice gemPrice = new GemPrice((Int32)gemObject["gem_to_gold"].GetNumber(), (Int32)gemObject["gold_to_gem"].GetNumber());
-                return gemPrice;
+                var result = client.PostAsync("api/v0.9/json/gem-price", null).Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    string resultString = result.Content.ReadAsStringAsync().Result;
+                    JsonObject jsonObject = JsonObject.Parse(resultString);
+                    JsonObject gemObject = jsonObject["result"].GetObject();
+                    GemPrice gemPrice = new GemPrice((Int32)gemObject["gem_to_gold"].GetNumber(), (Int32)gemObject["gold_to_gem"].GetNumber());
+                    return gemPrice;
+                }
+                else
+                {
+                    return null;
+                }
             }
-            else
+            catch(AggregateException e)
             {
+                //TODO: Message Dialog to user  
+                App.Current.Exit();
                 return null;
             }
         }
