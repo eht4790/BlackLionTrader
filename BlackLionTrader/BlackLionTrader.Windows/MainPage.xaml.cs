@@ -125,18 +125,6 @@ namespace BlackLionTrader
         }
 
         /// <summary>
-        /// Sets the width of the Grid in itemsListBox on load
-        /// </summary>
-        /// <param name="sender">The Grid in ItemsListBox in the Search hub section</param>
-        /// <param name="e">Event Data</param>
-        private void ItemsListBoxGrid_Loaded(object sender, RoutedEventArgs e)
-        {
-            Grid grid = (Grid)sender;
-            double width = Window.Current.Bounds.Width;
-            grid.Width = (Int32)(width * 9);
-        }
-
-        /// <summary>
         /// Event handler for focusing on the searchBox. Removes any default
         /// text that was in the box.
         /// </summary>
