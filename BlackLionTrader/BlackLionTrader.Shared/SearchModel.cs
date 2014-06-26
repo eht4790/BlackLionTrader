@@ -224,6 +224,10 @@ namespace BlackLionTrader
         {
             searchResults.Clear();
             List<Item> results = jsonHelper.searchItem(itemName);
+            if(results == null)
+            {
+                //TODO: Message Dialog to user
+            }
             var linqResults = from item in results
                               where item.RestrictionLevel >= minLvl &&
                                     item.RestrictionLevel <= maxLvl
