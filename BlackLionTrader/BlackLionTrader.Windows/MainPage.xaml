@@ -338,7 +338,13 @@
                         <StackPanel Grid.Row="2" Orientation="Horizontal">
                             <ComboBox ItemsSource="{Binding Types}" x:Name="TypeCB" BorderBrush="Black" Width="150" Margin="0, 0, 20, 0" SelectionChanged="TypeCB_SelectionChanged" Loaded="TypeCB_Loaded" />
                             <ComboBox ItemsSource="{Binding SubTypes}" x:Name="SubTypeCB" BorderBrush="Black" Width="150" Margin="0, 0, 20, 0" SelectionChanged="SubTypeCB_SelectionChanged" Loaded="SubTypeCB_Loaded"/>
-                            <ComboBox ItemsSource="{Binding Rarities}" x:Name="RarityCB" BorderBrush="Black" Width="150" Margin="0, 0, 20, 0" SelectionChanged="RarityCB_SelectionChanged" Loaded="RarityCB_Loaded"/>
+                            <ComboBox ItemsSource="{Binding Rarities}" x:Name="RarityCB" BorderBrush="Black" Width="150" Margin="0, 0, 20, 0" SelectionChanged="RarityCB_SelectionChanged" Loaded="RarityCB_Loaded">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" Foreground="{Binding Color}" />
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
                             <TextBox x:Name="MinLevelBox" BorderBrush="Black" Text="Min Lvl" Foreground="Gray" Width="75" Margin="0, 0, 5, 0" MaxLength="2" 
                                        GotFocus="LevelBox_GotFocus" LostFocus="MinLevelBox_LostFocus"/>
                             <TextBox x:Name="MaxLevelBox" BorderBrush="Black" Text="Max Lvl" Foreground="Gray" Width="75" Margin="0, 0, 20, 0" MaxLength="2" 

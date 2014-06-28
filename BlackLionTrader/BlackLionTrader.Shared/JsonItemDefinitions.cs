@@ -109,6 +109,7 @@ namespace BlackLionTrader
     {
         private int id;
         private string name;
+        private string color;
 
         /// <summary>
         /// The unique id of the rarity level
@@ -126,10 +127,56 @@ namespace BlackLionTrader
             get { return name; }
         }
 
+        /// <summary>
+        /// The color of the font used for the rarity
+        /// </summary>
+        public string Color
+        {
+            get { return color; }
+        }
+
         public Rarity(int id, string name)
         {
             this.id = id;
             this.name = name;
+            switch (id)
+            {
+                case 0:
+                    this.color = "Black";
+                    break;
+
+                case 1:
+                    this.color = "Black";
+                    break;
+
+                case 2:
+                    this.color = "DodgerBlue";
+                    break;
+
+                case 3:
+                    this.color = "LimeGreen";
+                    break;
+
+                case 4:
+                    this.color = "Gold";
+                    break;
+
+                case 5:
+                    this.color = "DarkOrange";
+                    break;
+
+                case 6:
+                    this.color = "DeepPink";
+                    break;
+
+                case 7:
+                    this.color = "Purple";
+                    break;
+
+                default:
+                    this.color = "Black";
+                    break;
+            }
         }
     }
 

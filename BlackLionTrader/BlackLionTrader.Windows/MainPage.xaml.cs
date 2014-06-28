@@ -50,7 +50,7 @@ namespace BlackLionTrader
 
         private ObservableCollection<string> types = new ObservableCollection<string>();
         private ObservableCollection<string> subtypes = new ObservableCollection<string>();
-        private ObservableCollection<string> rarities = new ObservableCollection<string>();
+        private ObservableCollection<Rarity> rarities = new ObservableCollection<Rarity>();
         private ObservableCollection<DisplayItem> items = new ObservableCollection<DisplayItem>();
         private App app = Application.Current as App;
         private TextBox searchBox;
@@ -75,7 +75,7 @@ namespace BlackLionTrader
         /// <summary>
         /// A collection of strings with all the rarity levels of an item
         /// </summary>
-        public ObservableCollection<string> Rarities
+        public ObservableCollection<Rarity> Rarities
         {
             get { return rarities;  }
         }
@@ -99,10 +99,9 @@ namespace BlackLionTrader
             WatchSection.Width = (Int32)(width * .9);
             GemSection.Width = width;
             types = new ObservableCollection<string>(app.controller.getTypesAsString());
-            rarities = new ObservableCollection<string>(app.controller.getRaritiesAsString());
+            rarities = new ObservableCollection<Rarity>(app.controller.getRarities());
             types.Insert(0, "Any");
             subtypes.Add("Any");
-            rarities.Insert(0, "Any");
         }
 
         /// <summary>
@@ -336,10 +335,17 @@ namespace BlackLionTrader
             if(!itemName.Equals("Item Name"))
             {
                 items.Clear();
-                List<DisplayItem> results = app.controller.searchItems(itemName);
-                foreach(DisplayItem result in results)
+                try
                 {
-                    items.Add(result);
+                    List<DisplayItem> results = app.controller.searchItems(itemName);
+                    foreach (DisplayItem result in results)
+                    {
+                        items.Add(result);
+                    }
+                }
+                catch(AggregateException exception)
+                {
+                    //ToDo: MessageDialog
                 }
             }
         }
