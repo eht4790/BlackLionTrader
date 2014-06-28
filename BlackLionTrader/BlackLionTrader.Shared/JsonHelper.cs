@@ -75,11 +75,9 @@ namespace BlackLionTrader
                     return null;
                 }
             }
-            catch(AggregateException e)
+            catch(Exception e)
             {
-                //TODO: Message Dialog to user  
-                App.Current.Exit();
-                return null;
+                throw e;
             }
         }
 
@@ -110,11 +108,9 @@ namespace BlackLionTrader
                     return null;
                 }
             }
-            catch(AggregateException e)
+            catch(Exception e)
             {
-                //TODO: Message Dialog to user  
-                App.Current.Exit();
-                return null;
+                throw e;
             }
         }
 
@@ -155,11 +151,9 @@ namespace BlackLionTrader
                     return null;
                 }
             }
-            catch(AggregateException e)
+            catch(Exception e)
             {
-                //TODO: Message Dialog to user  
-                App.Current.Exit();
-                return null;
+                throw e;
             }
         }
 
@@ -216,11 +210,9 @@ namespace BlackLionTrader
                 } while (currentPage <= totalPages);
                 return items;
             }
-            catch(AggregateException e)
+            catch(Exception e)
             {
-                //TODO: Message Dialog to user  
-                App.Current.Exit();
-                return null;
+                throw e;
             }
         }
 
@@ -246,15 +238,10 @@ namespace BlackLionTrader
                     return null;
                 }
             }
-            catch(AggregateException e)
+            catch(Exception e)
             {
-                //TODO: Message Dialog to user  
-                App.Current.Exit();
-                return null;
+                throw e;
             }
         }
-
-
-
     }
 }

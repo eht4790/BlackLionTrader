@@ -32,7 +32,7 @@ namespace BlackLionTrader
     {
         private JsonHelper jsonHelper;
         private List<Type> types = new List<Type>();
-        private Dictionary<int, Type> typesDict = new Dictionary<int, Type>();
+        //private Dictionary<int, Type> typesDict = new Dictionary<int, Type>();
         private List<Subtype> subtypes = new List<Subtype>();
         private List<Rarity> rarities = new List<Rarity>();
         private List<Item> searchResults = new List<Item>();
@@ -95,7 +95,14 @@ namespace BlackLionTrader
         public SearchModel(JsonHelper jsonHelper)
         {
             this.jsonHelper = jsonHelper;
-            setup();
+            try
+            {
+                setup();
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
         }
 
         /// <summary>
@@ -103,12 +110,16 @@ namespace BlackLionTrader
         /// </summary>
         private void setup()
         {
-            types = jsonHelper.getTypes();
-            foreach(Type type in types)
+            try
             {
-                typesDict.Add(type.ID, type);
+                types = jsonHelper.getTypes();
+                rarities = jsonHelper.getRarities();
+                rarities.Insert(0, new Rarity(-1, "Any"));
             }
-            rarities = jsonHelper.getRarities();
+            catch(Exception e)
+            {
+                throw e;
+            }
         }
 
         /// <summary>
@@ -222,33 +233,40 @@ namespace BlackLionTrader
         /// <param name="itemName">The item name being searched</param>
         public void search(string itemName)
         {
-            searchResults.Clear();
-            List<Item> results = jsonHelper.searchItem(itemName);
-            if(results == null)
+            try
             {
-                //TODO: Message Dialog to user
-            }
-            var linqResults = from item in results
-                              where item.RestrictionLevel >= minLvl &&
-                                    item.RestrictionLevel <= maxLvl
-                              select item;
+                searchResults.Clear();
+                List<Item> results = jsonHelper.searchItem(itemName);
+                if (results == null)
+                {
+                    //TODO: Message Dialog to user
+                }
+                var linqResults = from item in results
+                                  where item.RestrictionLevel >= minLvl &&
+                                        item.RestrictionLevel <= maxLvl
+                                  select item;
 
-            if(currentType != null)
+                if (currentType != null)
+                {
+                    linqResults = linqResults.Where(item => item.TypeId == currentType.ID);
+                }
+
+                if (currentSubtype != null)
+                {
+                    linqResults = linqResults.Where(item => item.SubtypeId == currentSubtype.ID);
+                }
+
+                if (currentRarity != null)
+                {
+                    linqResults = linqResults.Where(item => item.RarityId == currentRarity.ID);
+                }
+
+                searchResults = linqResults.ToList();
+            }
+            catch(Exception e)
             {
-                linqResults = linqResults.Where(item => item.TypeId == currentType.ID);
+                throw e;
             }
-
-            if(currentSubtype != null)
-            {
-                linqResults = linqResults.Where(item => item.SubtypeId == currentSubtype.ID);
-            }
-
-            if(currentRarity != null)
-            {
-                linqResults = linqResults.Where(item => item.RarityId == currentRarity.ID);
-            }
-
-            searchResults = linqResults.ToList();
 
         }
 
@@ -261,16 +279,6 @@ namespace BlackLionTrader
             List<DisplayItem> displayItems = new List<DisplayItem>();
             foreach(Item item in searchResults)
             {
-                Type itemType = typesDict[item.TypeId];
-                string typeString = "";
-                if(itemType.Subtypes.Count < 1)
-                {
-                    typeString = itemType.Name;
-                }
-                else
-                {
-                    typeString = itemType.Name + " // " + itemType.Subtypes[item.SubtypeId].Name;
-                }
                 displayItems.Add(new DisplayItem(item));
             }
             return displayItems;

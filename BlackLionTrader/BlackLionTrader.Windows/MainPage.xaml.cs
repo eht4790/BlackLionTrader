@@ -37,6 +37,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI;
 using System.Collections.ObjectModel;
+using Windows.UI.Popups;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -90,18 +91,25 @@ namespace BlackLionTrader
 
         public MainPage()
         {
-            this.InitializeComponent();
+            try
+            {
+                types = new ObservableCollection<string>(app.controller.getTypesAsString());
+                rarities = new ObservableCollection<Rarity>(app.controller.getRarities());
+                types.Insert(0, "Any");
+                subtypes.Add("Any");
+                this.InitializeComponent();
 
-            // Adjust width of hub sections according to screen resolution
-            var bounds = Window.Current.Bounds;
-            double width = bounds.Width;
-            SearchSection.Width = (Int32)(width * .9);
-            WatchSection.Width = (Int32)(width * .9);
-            GemSection.Width = width;
-            types = new ObservableCollection<string>(app.controller.getTypesAsString());
-            rarities = new ObservableCollection<Rarity>(app.controller.getRarities());
-            types.Insert(0, "Any");
-            subtypes.Add("Any");
+                // Adjust width of hub sections according to screen resolution
+                var bounds = Window.Current.Bounds;
+                double width = bounds.Width;
+                SearchSection.Width = (Int32)(width * .9);
+                WatchSection.Width = (Int32)(width * .9);
+                GemSection.Width = width;
+            }
+            catch(Exception e)
+            {
+                showMessage();
+            }
         }
 
         /// <summary>
@@ -345,9 +353,17 @@ namespace BlackLionTrader
                 }
                 catch(AggregateException exception)
                 {
-                    //ToDo: MessageDialog
+                    showMessage();
                 }
             }
+        }
+
+        private async void showMessage()
+        {
+            var msg = new MessageDialog("Could not connect to www.gw2spidy.com.\nCheck your internet connection and try again.");
+            msg.Title = "Oops!";
+            await msg.ShowAsync();
+            Application.Current.Exit();
         }
     }
 }

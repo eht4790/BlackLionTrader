@@ -35,10 +35,17 @@ namespace BlackLionTrader
 
         public Controller()
         {
-            jsonHelper = new JsonHelper();
-            searchModel = new SearchModel(jsonHelper);
-            watchModel = new WatchModel(jsonHelper);
-            gemModel = new GemsModel(jsonHelper);
+            try
+            {
+                jsonHelper = new JsonHelper();
+                searchModel = new SearchModel(jsonHelper);
+                watchModel = new WatchModel(jsonHelper);
+                gemModel = new GemsModel(jsonHelper);
+            }
+            catch(AggregateException e)
+            {
+                throw e;
+            }
         }
 
         /// <summary>
@@ -73,12 +80,12 @@ namespace BlackLionTrader
         /// Gets a list of Rarity names for the UI
         /// </summary>
         /// <returns>A List of strings of all Rarity names</returns>
-        public List<string> getRaritiesAsString()
+        public List<Rarity> getRarities()
         {
-            List<string> rarities = new List<string>();
+            List<Rarity> rarities = new List<Rarity>();
             foreach(Rarity rarity in searchModel.Rarities)
             {
-                rarities.Add(rarity.Name);
+                rarities.Add(rarity);
             }
             return rarities;
         }
@@ -148,8 +155,15 @@ namespace BlackLionTrader
 
         public List<DisplayItem> searchItems(string itemName)
         {
-            searchModel.search(itemName);
-            return searchModel.getDisplayItems();
+            try
+            {
+                searchModel.search(itemName);
+                return searchModel.getDisplayItems();
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
         }
     }
 }

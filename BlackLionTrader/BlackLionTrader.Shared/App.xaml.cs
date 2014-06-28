@@ -34,6 +34,8 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Popups;
+using System.Net.Http;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
 
@@ -44,7 +46,7 @@ namespace BlackLionTrader
     /// </summary>
     public sealed partial class App : Application
     {
-        public Controller controller = new Controller();
+        public Controller controller;
 
 #if WINDOWS_PHONE_APP
         private TransitionCollection transitions;
@@ -58,6 +60,14 @@ namespace BlackLionTrader
         {
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
+            try
+            {
+                controller = new Controller();
+            }
+            catch (Exception exception)
+            {
+                // Do Nothing. Handled later MainPage.xaml.cs constructor.
+            }
         }
 
         /// <summary>
