@@ -30,8 +30,7 @@ namespace BlackLionTrader
         private string img;
         private string name;
         private int level;
-        private int rarity;
-        private string type;
+        private string rarityColor;
         private int supply;
         private int demand;
         private string minSaleOffer;
@@ -84,18 +83,9 @@ namespace BlackLionTrader
         /// <summary>
         /// The name of the rarity of the item
         /// </summary>
-        public int Rarity
+        public string RarityColor
         {
-            get { return rarity; }
-        }
-
-        /// <summary>
-        /// The name of the type and subtype if applicable
-        /// Ex. Weapon // Sword
-        /// </summary>
-        public string Type
-        {
-            get { return type; }
+            get { return rarityColor; }
         }
 
         /// <summary>
@@ -308,7 +298,44 @@ namespace BlackLionTrader
             }
             this.name = item.Name;
             this.level = item.RestrictionLevel;
-            this.rarity = item.RarityId;
+            switch (item.RarityId)
+            {
+                case 0:
+                    rarityColor = "Black";
+                    break;
+
+                case 1:
+                    rarityColor = "Black";
+                    break;
+
+                case 2:
+                    rarityColor = "DodgerBlue";
+                    break;
+
+                case 3:
+                    rarityColor = "LimeGreen";
+                    break;
+
+                case 4:
+                    rarityColor = "Gold";
+                    break;
+
+                case 5:
+                    rarityColor = "DarkOrange";
+                    break;
+
+                case 6:
+                    rarityColor = "DeepPink";
+                    break;
+
+                case 7:
+                    rarityColor = "Purple";
+                    break;
+
+                default:
+                    rarityColor = "Black";
+                    break;
+            }
             this.supply = item.SaleAvailability;
             this.demand = item.OfferAvailability;
             this.minSaleOffer = item.MinSale.ToString();

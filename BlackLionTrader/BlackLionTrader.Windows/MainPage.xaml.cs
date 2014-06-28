@@ -54,7 +54,7 @@ namespace BlackLionTrader
         private ObservableCollection<DisplayItem> items = new ObservableCollection<DisplayItem>();
         private App app = Application.Current as App;
         private TextBox searchBox;
-        private ListBox itemsListBox;
+        private ComboBox subtypesCB;
 
         /// <summary>
         /// A collection of strings with all the various item types
@@ -100,6 +100,9 @@ namespace BlackLionTrader
             GemSection.Width = width;
             types = new ObservableCollection<string>(app.controller.getTypesAsString());
             rarities = new ObservableCollection<string>(app.controller.getRaritiesAsString());
+            types.Insert(0, "Any");
+            subtypes.Add("Any");
+            rarities.Insert(0, "Any");
         }
 
         /// <summary>
@@ -113,13 +116,46 @@ namespace BlackLionTrader
         }
 
         /// <summary>
+        /// Sets the default index of the TypeCB ComboBox
+        /// </summary>
+        /// <param name="sender">The TypeCB ComboBox in the Search hub section</param>
+        /// <param name="e">Event Data</param>
+        private void TypeCB_Loaded(object sender, RoutedEventArgs e)
+        {
+            ComboBox cb = (ComboBox)sender;
+            cb.SelectedIndex = 0;
+        }
+
+        /// <summary>
+        /// Sets the default index of the SubtypeCB ComboBox
+        /// </summary>
+        /// <param name="sender">The SubtypeCB ComboBox in the Search hub section</param>
+        /// <param name="e">Event Data</param>
+        private void SubTypeCB_Loaded(object sender, RoutedEventArgs e)
+        {
+            subtypesCB = (ComboBox)sender;
+            subtypesCB.SelectedIndex = 0;
+        }
+
+        /// <summary>
+        /// Sets the default index of the RarityCB ComboBox
+        /// </summary>
+        /// <param name="sender">The RarityCB ComboBox in the Search hub section</param>
+        /// <param name="e">Event Data</param>
+        private void RarityCB_Loaded(object sender, RoutedEventArgs e)
+        {
+            ComboBox cb = (ComboBox)sender;
+            cb.SelectedIndex = 0;
+        }
+
+        /// <summary>
         /// Sets the width of the itemsListBox on load
         /// </summary>
         /// <param name="sender">The ItemsListBox in the Search hub section</param>
         /// <param name="e">Event Data</param>
         private void ItemsListBox_Loaded(object sender, RoutedEventArgs e)
         {
-            itemsListBox = (ListBox)sender;
+            ListBox itemsListBox = (ListBox)sender;
             double width = Window.Current.Bounds.Width;
             itemsListBox.Width = (Int32)(width * .9);
         }
@@ -243,13 +279,18 @@ namespace BlackLionTrader
         private void TypeCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox typeBox = (ComboBox)sender;
-            app.controller.setType(typeBox.SelectedIndex);
+            app.controller.setType(typeBox.SelectedIndex - 1);
             List<string> list = app.controller.getSubtypesAsString();
             subtypes.Clear();
+            subtypes.Add("Any");
             app.controller.setSubtype(-1);
             foreach(string subtype in list)
             {
                 subtypes.Add(subtype);
+            }
+            if (subtypesCB != null)
+            {
+                subtypesCB.SelectedIndex = 0;
             }
         }
 
@@ -261,7 +302,14 @@ namespace BlackLionTrader
         private void SubTypeCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox subtypeBox = (ComboBox)sender;
-            app.controller.setSubtype(subtypeBox.SelectedIndex);
+            if (subtypeBox.SelectedIndex != -1)
+            {
+                app.controller.setSubtype(subtypeBox.SelectedIndex - 1);
+            }
+            else
+            {
+                app.controller.setSubtype(subtypeBox.SelectedIndex);
+            }
         }
 
         /// <summary>
@@ -272,7 +320,7 @@ namespace BlackLionTrader
         private void RarityCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox rarityBox = (ComboBox)sender;
-            app.controller.setRarity(rarityBox.SelectedIndex);
+            app.controller.setRarity(rarityBox.SelectedIndex - 1);
         }
 
         /// <summary>

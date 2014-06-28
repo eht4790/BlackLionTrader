@@ -336,9 +336,9 @@
 
                         <!--Row 2 Advanced Search Options-->
                         <StackPanel Grid.Row="2" Orientation="Horizontal">
-                            <ComboBox ItemsSource="{Binding Types}" x:Name="TypeCB" BorderBrush="Black" Width="150" Margin="0, 0, 20, 0" SelectionChanged="TypeCB_SelectionChanged" />
-                            <ComboBox ItemsSource="{Binding SubTypes}" x:Name="SubTypeCB" BorderBrush="Black" Width="150" Margin="0, 0, 20, 0" SelectionChanged="SubTypeCB_SelectionChanged"/>
-                            <ComboBox ItemsSource="{Binding Rarities}" x:Name="RarityCB" BorderBrush="Black" Width="150" Margin="0, 0, 20, 0" SelectionChanged="RarityCB_SelectionChanged"/>
+                            <ComboBox ItemsSource="{Binding Types}" x:Name="TypeCB" BorderBrush="Black" Width="150" Margin="0, 0, 20, 0" SelectionChanged="TypeCB_SelectionChanged" Loaded="TypeCB_Loaded" />
+                            <ComboBox ItemsSource="{Binding SubTypes}" x:Name="SubTypeCB" BorderBrush="Black" Width="150" Margin="0, 0, 20, 0" SelectionChanged="SubTypeCB_SelectionChanged" Loaded="SubTypeCB_Loaded"/>
+                            <ComboBox ItemsSource="{Binding Rarities}" x:Name="RarityCB" BorderBrush="Black" Width="150" Margin="0, 0, 20, 0" SelectionChanged="RarityCB_SelectionChanged" Loaded="RarityCB_Loaded"/>
                             <TextBox x:Name="MinLevelBox" BorderBrush="Black" Text="Min Lvl" Foreground="Gray" Width="75" Margin="0, 0, 5, 0" MaxLength="2" 
                                        GotFocus="LevelBox_GotFocus" LostFocus="MinLevelBox_LostFocus"/>
                             <TextBox x:Name="MaxLevelBox" BorderBrush="Black" Text="Max Lvl" Foreground="Gray" Width="75" Margin="0, 0, 20, 0" MaxLength="2" 
@@ -385,7 +385,7 @@
                                             <ColumnDefinition Width=".3*" />
                                         </Grid.ColumnDefinitions>
                                         <Image Grid.Column="0" Height="40" Source="{Binding Img}" Margin="0, 0, 10, 0"/>
-                                        <TextBlock Grid.Column="1"  Text="{Binding Name}" Margin="0, 0, 10, 0"/>
+                                        <TextBlock Grid.Column="1"  Text="{Binding Name}" Foreground="{Binding RarityColor}" Margin="0, 0, 10, 0"/>
                                         <TextBlock Grid.Column="2" Text="{Binding Level}" />
                                         <TextBlock Grid.Column="3" Text="{Binding Supply}" Margin="0, 0, 10, 0"/>
                                         <TextBlock Grid.Column="4" Text="{Binding Demand}" Margin="0, 0, 10, 0"/>
