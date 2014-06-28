@@ -11,6 +11,15 @@ Release
 -------
 No currently working release 
 
+Current Goals
+-------------
+__Search Hub Section__
+
+1. Fix Spacing of elements in the ItemsListBox
+2. Add Labels to columns in ListBox
+3. Add Favorites Button to items in ListBox
+4. Add "Loading Bar" when making POST request for searching
+
 License
 -------
 Copyright (C) 2014  Eric Trumble
