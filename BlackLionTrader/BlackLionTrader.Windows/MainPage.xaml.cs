@@ -167,6 +167,13 @@ namespace BlackLionTrader
             itemsListBox.Width = (Int32)(width * .83);
         }
 
+        private void ListBoxLabels_Loaded(object sender, RoutedEventArgs e)
+        {
+            Grid listBoxLabels = (Grid)sender;
+            double width = Window.Current.Bounds.Width;
+            listBoxLabels.Width = (Int32)(width * .83);
+        }
+
         /// <summary>
         /// Event handler for focusing on the searchBox. Removes any default
         /// text that was in the box.

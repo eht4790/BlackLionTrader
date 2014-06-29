@@ -316,6 +316,7 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
                         
@@ -351,8 +352,30 @@
                                      GotFocus="LevelBox_GotFocus" LostFocus="MaxLevelBox_LostFocus"/>
                         </StackPanel>
                         
-                        <!--Row 3 Items List-->
-                        <ListBox x:Name="ItemsListBox" Grid.Row="3"  Margin="0, 60, 0, 30" HorizontalAlignment="Stretch"  VerticalAlignment="Top" ItemsSource="{Binding Items}" Loaded="ItemsListBox_Loaded">
+                        <!---Row 3 Labels for Items List-->
+                        <Grid x:Name="ListBoxLabels" Grid.Row="3" Margin="0, 20, 0, 0" Loaded="ListBoxLabels_Loaded">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="30" />
+                                <ColumnDefinition Width="75" />
+                                <ColumnDefinition Width="114" />
+                                <ColumnDefinition Width="154" />
+                                <ColumnDefinition Width="154" />
+                                <ColumnDefinition Width="90" />
+                                <ColumnDefinition Width="80" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="Name" FontSize="20" FontWeight="Bold" Margin="60, 0, 0, 0"/>
+                            <TextBlock Grid.Column="1" Text="Lvl" FontSize="20" FontWeight="Bold"/>
+                            <TextBlock Grid.Column="2" Text="Supply" FontSize="20" FontWeight="Bold" />
+                            <TextBlock Grid.Column="3" Text="Demand" FontSize="20" FontWeight="Bold" />
+                            <TextBlock Grid.Column="4" Text="Min Sale Offer" FontSize="20" FontWeight="Bold" />
+                            <TextBlock Grid.Column="5" Text="Max Buy Offer" FontSize="20" FontWeight="Bold" />
+                            <TextBlock Grid.Column="6" Text="Margin" FontSize="20" FontWeight="Bold" />
+                            <TextBlock Grid.Column="7" Text="Watch" FontSize="20" FontWeight="Bold" />
+                        </Grid>
+                        
+                        <!--Row 4 Items List-->
+                        <ListBox x:Name="ItemsListBox" Grid.Row="4"  Margin="0, 10, 0, 30" HorizontalAlignment="Stretch"  VerticalAlignment="Top" ItemsSource="{Binding Items}" Loaded="ItemsListBox_Loaded">
                             <ListBox.ItemContainerStyle>
                                 <Style TargetType="ListBoxItem">
                                     <Setter Property="HorizontalAlignment" Value="Stretch"/>
@@ -365,7 +388,7 @@
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="25" />
+                                            <ColumnDefinition Width="35" />
                                             <ColumnDefinition Width="65" />
                                             <ColumnDefinition Width="65" />
                                             <ColumnDefinition Width="60" />
