@@ -55,6 +55,7 @@ namespace BlackLionTrader
         private string marginSilverImg = null;
         private string marginGold;
         private string marginGoldImg = null;
+        private bool watched = false;
 
         /// <summary>
         /// The url of the image associate with the file
@@ -283,6 +284,24 @@ namespace BlackLionTrader
         public string MarginGoldImg
         {
             get { return marginGoldImg; }
+        }
+
+        /// <summary>
+        /// The source for the Watch/Unwatch icon.
+        /// </summary>
+        public string WatchImg
+        {
+            get 
+            {
+                if(watched)
+                {
+                    return "SharedAssets/watch.png";
+                }
+                else
+                {
+                    return "SharedAssets/unwatch.png";
+                }
+            }
         }
 
         public DisplayItem(Item item)
