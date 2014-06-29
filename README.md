@@ -15,9 +15,8 @@ Current Goals
 -------------
 __Search Hub Section__
 
-1. Add Labels to columns in ListBox
-2. Add Favorites Button functionality to items in ListBox
-3. Add "Loading Bar" when making POST request for searching
+1. Add Favorites Button functionality to items in ListBox
+2. Add "Loading Bar" when making POST request for searching
 
 License
 -------
