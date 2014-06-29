@@ -18,6 +18,9 @@ __Search Hub Section__
 1. Add Favorites Button functionality to items in ListBox
 2. Add "Loading Bar" when making POST request for searching
 
+__Item Page__
+A page with information of a single item
+
 License
 -------
 Copyright (C) 2014  Eric Trumble
