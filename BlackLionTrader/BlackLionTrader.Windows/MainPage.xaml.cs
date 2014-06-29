@@ -164,7 +164,7 @@ namespace BlackLionTrader
         {
             ListBox itemsListBox = (ListBox)sender;
             double width = Window.Current.Bounds.Width;
-            itemsListBox.Width = (Int32)(width * .9);
+            itemsListBox.Width = (Int32)(width * .83);
         }
 
         /// <summary>
