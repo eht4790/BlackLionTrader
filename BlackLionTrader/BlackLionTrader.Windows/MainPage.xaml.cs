@@ -365,6 +365,9 @@ namespace BlackLionTrader
             }
         }
 
+        /// <summary>
+        /// Displays a MessageDialog to the user if an exception is thrown then exits the app
+        /// </summary>
         private async void showMessage()
         {
             var msg = new MessageDialog("Could not connect to www.gw2spidy.com.\nCheck your internet connection and try again.");
