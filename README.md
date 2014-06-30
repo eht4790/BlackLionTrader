@@ -17,6 +17,7 @@ __Search Hub Section__
 
 1. Add Favorites Button functionality to items in ListBox
 2. Add "Loading Bar" when making POST request for searching
+3. Sortable Columns
 
 __Item Page__
 A page with information of a single item
