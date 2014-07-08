@@ -301,7 +301,7 @@
     <!--Main Grid-->
     <Grid>
         <Grid.Background>
-            <ImageBrush Stretch="Fill" ImageSource="/Assets/BackgroundLogo.png" />
+            <ImageBrush Stretch="Fill" ImageSource="/Assets/Background.png" />
         </Grid.Background>
         <Hub>
             
