@@ -55,6 +55,7 @@ namespace BlackLionTrader
         private ObservableCollection<DisplayItem> items = new ObservableCollection<DisplayItem>();
         private App app = Application.Current as App;
         private TextBox searchBox;
+        private ProgressRing progressRing;
         private ComboBox subtypesCB;
 
         /// <summary>
@@ -120,6 +121,16 @@ namespace BlackLionTrader
         private void ItemSearchBox_Loaded(object sender, RoutedEventArgs e)
         {
             searchBox = (TextBox)sender;
+        }
+
+        /// <summary>
+        /// Store a reference to the ProgressRing
+        /// </summary>
+        /// <param name="sender">The ProgressRing in the Search hub section</param>
+        /// <param name="e">Event data</param>
+        private void ProgressRing_Loaded(object sender, RoutedEventArgs e)
+        {
+            progressRing = (ProgressRing)sender;
         }
 
         /// <summary>

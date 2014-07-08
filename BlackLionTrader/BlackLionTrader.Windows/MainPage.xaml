@@ -25,7 +25,7 @@
                                         <Storyboard>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border"
                                                                    Storyboard.TargetProperty="Background">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Black" />
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Red" />
                                             </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
                                                                    Storyboard.TargetProperty="Foreground">
@@ -326,6 +326,7 @@
                                      Foreground="Gray" Text="Item Name" MaxLength="40"
                                      GotFocus="ItemSearchBox_GotFocus" LostFocus="ItemSearchBox_LostFocus" Loaded="ItemSearchBox_Loaded"/>
                             <Button x:Name="SearchBtn" Content="Search" Width="94" Height="40" BorderBrush="Black" Foreground="Black" Background="White" Click="SearchBtn_Click" />
+                            <ProgressRing IsActive="False" Foreground="Red"  Loaded="ProgressRing_Loaded" />
                         </StackPanel>
                         
                         <!--Row 1 Advanced Search Labels-->
@@ -364,7 +365,7 @@
                                 <ColumnDefinition Width="90" />
                                 <ColumnDefinition Width="80" />
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="Name" FontSize="20" FontWeight="Bold" Margin="60, 0, 0, 0"/>
+                            <TextBlock Grid.Column="0" Text="Name" FontSize="20" FontWeight="Bold" Margin="0, 0, 0, 0"/>
                             <TextBlock Grid.Column="1" Text="Lvl" FontSize="20" FontWeight="Bold"/>
                             <TextBlock Grid.Column="2" Text="Supply" FontSize="20" FontWeight="Bold" />
                             <TextBlock Grid.Column="3" Text="Demand" FontSize="20" FontWeight="Bold" />
