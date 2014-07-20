@@ -231,12 +231,12 @@ namespace BlackLionTrader
         /// according to search options, and store the results in searchResults
         /// </summary>
         /// <param name="itemName">The item name being searched</param>
-        public void search(string itemName)
+        public async Task search(string itemName)
         {
             try
             {
                 searchResults.Clear();
-                List<Item> results = jsonHelper.searchItem(itemName);
+                List<Item> results = await jsonHelper.searchItem(itemName);
                 if (results == null)
                 {
                     //TODO: Message Dialog to user

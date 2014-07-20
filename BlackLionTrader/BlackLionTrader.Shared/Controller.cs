@@ -23,6 +23,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace BlackLionTrader
 {
@@ -153,11 +154,11 @@ namespace BlackLionTrader
             searchModel.changeMaxLvl(lvl);
         }
 
-        public List<DisplayItem> searchItems(string itemName)
+        public async Task<List<DisplayItem>> searchItems(string itemName)
         {
             try
             {
-                searchModel.search(itemName);
+                await searchModel.search(itemName);
                 return searchModel.getDisplayItems();
             }
             catch(Exception e)

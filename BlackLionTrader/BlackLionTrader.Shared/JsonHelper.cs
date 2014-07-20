@@ -24,6 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using Windows.Data.Json;
 
 namespace BlackLionTrader
@@ -162,7 +163,7 @@ namespace BlackLionTrader
         /// </summary>
         /// <param name="searchString">The item name that is being searched</param>
         /// <returns>The list of possible items</returns>
-        public List<Item> searchItem(string searchString)
+        public async Task<List<Item>> searchItem(string searchString)
         {
             try
             {
@@ -171,7 +172,7 @@ namespace BlackLionTrader
                 List<Item> items = new List<Item>();
                 do
                 {
-                    var result = client.PostAsync("api/v0.9/json/item-search/" + searchString + "/" + currentPage, null).Result;
+                    var result = await client.PostAsync("api/v0.9/json/item-search/" + searchString + "/" + currentPage, null);
                     if (result.IsSuccessStatusCode)
                     {
                         string resultString = result.Content.ReadAsStringAsync().Result;

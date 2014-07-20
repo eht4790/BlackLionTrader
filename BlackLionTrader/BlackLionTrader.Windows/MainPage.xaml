@@ -326,7 +326,7 @@
                                      Foreground="Gray" Text="Item Name" MaxLength="40"
                                      GotFocus="ItemSearchBox_GotFocus" LostFocus="ItemSearchBox_LostFocus" Loaded="ItemSearchBox_Loaded"/>
                             <Button x:Name="SearchBtn" Content="Search" Width="94" Height="40" BorderBrush="Black" Foreground="Black" Background="White" Click="SearchBtn_Click" />
-                            <ProgressRing IsActive="False" Foreground="Red"  Loaded="ProgressRing_Loaded" />
+                            <ProgressRing IsActive="False" Foreground="Red"  Loaded="ProgressRing_Loaded" Width="50" Height="50"/>
                         </StackPanel>
                         
                         <!--Row 1 Advanced Search Labels-->

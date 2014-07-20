@@ -38,6 +38,7 @@ using Windows.UI.Xaml.Navigation;
 using Windows.UI;
 using System.Collections.ObjectModel;
 using Windows.UI.Popups;
+using System.Threading.Tasks;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -345,7 +346,7 @@ namespace BlackLionTrader
         private void RarityCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox rarityBox = (ComboBox)sender;
-            app.controller.setRarity(rarityBox.SelectedIndex - 1);
+            app.controller.setRarity(rarityBox.SelectedIndex);
         }
 
         /// <summary>
@@ -355,24 +356,33 @@ namespace BlackLionTrader
         /// </summary>
         /// <param name="sender">The SearchBtn Button in the Search hub section</param>
         /// <param name="e">Event Data</param>
-        private void SearchBtn_Click(object sender, RoutedEventArgs e)
+        private async void SearchBtn_Click(object sender, RoutedEventArgs e)
         {
+            progressRing.IsActive = true;
             string itemName = searchBox.Text;
             if(!itemName.Equals("Item Name"))
             {
                 items.Clear();
-                try
+                List<DisplayItem> results = await Task.Run(() => runSearch(itemName));
+                foreach(DisplayItem result in results)
                 {
-                    List<DisplayItem> results = app.controller.searchItems(itemName);
-                    foreach (DisplayItem result in results)
-                    {
-                        items.Add(result);
-                    }
+                    items.Add(result);
                 }
-                catch(AggregateException exception)
-                {
-                    showMessage();
-                }
+            }
+            progressRing.IsActive = false;
+        }
+
+        private async Task<List<DisplayItem>> runSearch(string itemName)
+        {
+            try
+            {
+                List<DisplayItem> results = await app.controller.searchItems(itemName);
+                return results;
+            }
+            catch (AggregateException exception)
+            {
+                showMessage();
+                return null;
             }
         }
 
