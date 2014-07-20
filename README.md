@@ -20,6 +20,7 @@ __Search Hub Section__
 3. Allow searching of a blank name to get all of a specified type
 
 __Item Page__
+
 1. A page with information of a single item
 
 License
