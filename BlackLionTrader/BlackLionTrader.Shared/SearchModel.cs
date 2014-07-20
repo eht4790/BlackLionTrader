@@ -166,7 +166,7 @@ namespace BlackLionTrader
         /// <param name="id"></param>
         public void changeRarity(int id)
         {
-            if(id == -1)
+            if(id == 0)
             {
                 currentRarity = null;
             }

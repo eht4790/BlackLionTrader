@@ -158,7 +158,7 @@ namespace BlackLionTrader
                     break;
 
                 case 4:
-                    this.color = "Gold";
+                    this.color = "Goldenrod";
                     break;
 
                 case 5:

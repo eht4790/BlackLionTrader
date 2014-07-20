@@ -336,7 +336,7 @@ namespace BlackLionTrader
                     break;
 
                 case 4:
-                    rarityColor = "Gold";
+                    rarityColor = "Goldenrod";
                     break;
 
                 case 5:
