@@ -331,15 +331,15 @@
                         
                         <!--Row 1 Advanced Search Labels-->
                         <StackPanel Grid.Row="1" Orientation="Horizontal" >
-                            <TextBlock Text="Type:" FontSize="20" FontWeight="Bold" Margin="0, 0, 124, 0"/>
-                            <TextBlock Text="SubType:" FontSize="20" FontWeight="Bold" Margin="0, 0, 90, 0"/>
+                            <TextBlock Text="Type:" FontSize="20" FontWeight="Bold" Margin="0, 0, 174, 0"/>
+                            <TextBlock Text="SubType:" FontSize="20" FontWeight="Bold" Margin="0, 0, 115, 0"/>
                             <TextBlock Text="Rarity:" FontSize="20" FontWeight="Bold"/>
                         </StackPanel>
 
                         <!--Row 2 Advanced Search Options-->
                         <StackPanel Grid.Row="2" Orientation="Horizontal">
-                            <ComboBox ItemsSource="{Binding Types}" x:Name="TypeCB" BorderBrush="Black" Width="150" Margin="0, 0, 20, 0" SelectionChanged="TypeCB_SelectionChanged" Loaded="TypeCB_Loaded" />
-                            <ComboBox ItemsSource="{Binding SubTypes}" x:Name="SubTypeCB" BorderBrush="Black" Width="150" Margin="0, 0, 20, 0" SelectionChanged="SubTypeCB_SelectionChanged" Loaded="SubTypeCB_Loaded"/>
+                            <ComboBox ItemsSource="{Binding Types}" x:Name="TypeCB" BorderBrush="Black" Width="200" Margin="0, 0, 20, 0" SelectionChanged="TypeCB_SelectionChanged" Loaded="TypeCB_Loaded" />
+                            <ComboBox ItemsSource="{Binding SubTypes}" x:Name="SubTypeCB" BorderBrush="Black" Width="175" Margin="0, 0, 20, 0" SelectionChanged="SubTypeCB_SelectionChanged" Loaded="SubTypeCB_Loaded"/>
                             <ComboBox ItemsSource="{Binding Rarities}" x:Name="RarityCB" BorderBrush="Black" Width="150" Margin="0, 0, 20, 0" SelectionChanged="RarityCB_SelectionChanged" Loaded="RarityCB_Loaded">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
