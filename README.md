@@ -16,8 +16,8 @@ Current Goals
 __Search Hub Section__
 
 1. Add Favorites Button functionality to items in ListBox
-2. Add "Loading Bar" when making POST request for searching
-3. Sortable Columns
+2. Sortable Columns
+3. Allow searching of a blank name to get all of a specified type
 
 __Item Page__
 A page with information of a single item
