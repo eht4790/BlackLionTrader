@@ -3,7 +3,7 @@ BlackLionTrader
 
 Description
 -----------
-A Windows Universal App for monitoring the Guild Wars 2 Trading post. Using the gw2spidy.com API the
+A Windows Universal App for monitoring the Guild Wars 2 Trading post. Using the [gw2spidy.com API] (https://github.com/rubensayshi/gw2spidy/wiki/API-v0.9) the
 user can look at current in game market information and set notifications when conditions about items
 on the market are met.
 
@@ -16,11 +16,12 @@ Current Goals
 __Search Hub Section__
 
 1. Add Favorites Button functionality to items in ListBox
-2. Add "Loading Bar" when making POST request for searching
-3. Sortable Columns
+2. Sortable Columns
+3. Allow searching of a blank name to get all of a specified type
 
 __Item Page__
-A page with information of a single item
+
+1. A page with information of a single item
 
 License
 -------
