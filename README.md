@@ -17,7 +17,6 @@ __Search Hub Section__
 
 1. Add Favorites Button functionality to items in ListBox
 2. Sortable Columns
-3. Allow searching of a blank name to get all of a specified type
 
 __Item Page__
 
