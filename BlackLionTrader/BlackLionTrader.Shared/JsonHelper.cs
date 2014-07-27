@@ -159,7 +159,8 @@ namespace BlackLionTrader
         }
 
         /// <summary>
-        /// Gives a list of possible items with names that match the given searchString
+        /// Gives a list of possible items with names that match the given searchString.
+        /// Must make multiple calls as results are paged. 
         /// </summary>
         /// <param name="searchString">The item name that is being searched</param>
         /// <returns>The list of possible items</returns>
@@ -212,6 +213,51 @@ namespace BlackLionTrader
                 return items;
             }
             catch(Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
+        /// Returns a list of all possible items on the market for the given typeId
+        /// </summary>
+        /// <param name="typeId">The id of the type that the resulting items should be</param>
+        /// <returns>A list of all items of the given type id</returns>
+        public async Task<List<Item>> searchAll(int typeId)
+        {
+            try
+            {
+                List<Item> items = new List<Item>();
+                var result = await client.PostAsync("api/v0.9/json/all-items/" + typeId, null);
+                if(result.IsSuccessStatusCode)
+                {
+                    string resultString = result.Content.ReadAsStringAsync().Result;
+                    JsonObject resultObject = JsonObject.Parse(resultString);
+                    JsonArray resultArray = resultObject["results"].GetArray();
+                    foreach(JsonValue itemVal in resultArray)
+                    {
+                        JsonObject itemObject = itemVal.GetObject();
+                        Item item = new Item((Int32)itemObject["data_id"].GetNumber(),
+                                                itemObject["name"].GetString(),
+                                            (Int32)itemObject["rarity"].GetNumber(),
+                                            (Int32)itemObject["restriction_level"].GetNumber(),
+                                            itemObject["img"].GetString(),
+                                            (Int32)itemObject["type_id"].GetNumber(),
+                                            (Int32)itemObject["sub_type_id"].GetNumber(),
+                                            itemObject["price_last_changed"].GetString(),
+                                            (Int32)itemObject["max_offer_unit_price"].GetNumber(),
+                                            (Int32)itemObject["min_sale_unit_price"].GetNumber(),
+                                            (Int32)itemObject["offer_availability"].GetNumber(),
+                                            (Int32)itemObject["sale_availability"].GetNumber(),
+                                            (Int32)itemObject["sale_price_change_last_hour"].GetNumber(),
+                                            (Int32)itemObject["offer_price_change_last_hour"].GetNumber()
+                        );
+                        items.Add(item);
+                    }
+                }
+                return items;
+            }
+            catch (Exception e)
             {
                 throw e;
             }

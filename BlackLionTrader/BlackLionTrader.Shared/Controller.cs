@@ -154,11 +154,24 @@ namespace BlackLionTrader
             searchModel.changeMaxLvl(lvl);
         }
 
+        /// <summary>
+        /// Sends a search request to the model and either searches for items with the given
+        /// item name as a substring or if null searches for all items of the currently selected type
+        /// </summary>
+        /// <param name="itemName"></param>
+        /// <returns></returns>
         public async Task<List<DisplayItem>> searchItems(string itemName)
         {
             try
             {
-                await searchModel.search(itemName);
+                if (itemName == null)
+                {
+                    await searchModel.searchAll();
+                }
+                else
+                {
+                    await searchModel.search(itemName);
+                }
                 return searchModel.getDisplayItems();
             }
             catch(Exception e)

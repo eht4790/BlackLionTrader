@@ -369,6 +369,15 @@ namespace BlackLionTrader
                     items.Add(result);
                 }
             }
+            else
+            {
+                items.Clear();
+                List<DisplayItem> results = await Task.Run(() => runSearch(null));
+                foreach(DisplayItem result in results)
+                {
+                    items.Add(result);
+                }
+            }
             progressRing.IsActive = false;
         }
 

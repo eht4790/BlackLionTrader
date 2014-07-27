@@ -227,7 +227,7 @@ namespace BlackLionTrader
         }
 
         /// <summary>
-        /// Sends searches for items with the given name, filters the results
+        /// Searches for items with the given name, filters the results
         /// according to search options, and store the results in searchResults
         /// </summary>
         /// <param name="itemName">The item name being searched</param>
@@ -243,7 +243,9 @@ namespace BlackLionTrader
                 }
                 var linqResults = from item in results
                                   where item.RestrictionLevel >= minLvl &&
-                                        item.RestrictionLevel <= maxLvl
+                                        item.RestrictionLevel <= maxLvl &&
+                                        item.SaleAvailability > 0 &&
+                                        item.OfferAvailability > 0
                                   select item;
 
                 if (currentType != null)
@@ -268,6 +270,50 @@ namespace BlackLionTrader
                 throw e;
             }
 
+        }
+
+        /// <summary>
+        /// Searches for all items of the given type id, filters them, and stores
+        /// them in searchResults
+        /// </summary>
+        /// <param name="typeId"></param>
+        /// <returns></returns>
+        public async Task searchAll()
+        {
+            searchResults.Clear();
+            if (currentType != null)
+            {
+                try
+                {
+                    List<Item> results = await jsonHelper.searchAll(currentType.ID);
+                    if (results == null)
+                    {
+                        //TODO: Message Dialo to user
+                    }
+                    var linqResults = from item in results
+                                      where item.RestrictionLevel >= minLvl &&
+                                            item.RestrictionLevel <= maxLvl &&
+                                            item.SaleAvailability > 0 &&
+                                            item.OfferAvailability > 0
+                                      select item;
+
+                    if (currentSubtype != null)
+                    {
+                        linqResults = linqResults.Where(item => item.SubtypeId == currentSubtype.ID);
+                    }
+
+                    if (currentRarity != null)
+                    {
+                        linqResults = linqResults.Where(item => item.RarityId == currentRarity.ID);
+                    }
+
+                    searchResults = linqResults.ToList();
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+            }
         }
 
         /// <summary>
