@@ -3,7 +3,7 @@ BlackLionTrader
 
 Description
 -----------
-A Windows Universal App for monitoring the Guild Wars 2 Trading post. Using the gw2spidy.com API the
+A Windows Universal App for monitoring the Guild Wars 2 Trading post. Using the [gw2spidy.com API] (https://github.com/rubensayshi/gw2spidy/wiki/API-v0.9) the
 user can look at current in game market information and set notifications when conditions about items
 on the market are met.
 
