@@ -32,7 +32,6 @@ namespace BlackLionTrader
     {
         private JsonHelper jsonHelper;
         private List<Type> types = new List<Type>();
-        //private Dictionary<int, Type> typesDict = new Dictionary<int, Type>();
         private List<Subtype> subtypes = new List<Subtype>();
         private List<Rarity> rarities = new List<Rarity>();
         private List<Item> searchResults = new List<Item>();
@@ -43,6 +42,10 @@ namespace BlackLionTrader
 
         private int minLvl = 0;
         private int maxLvl = 80;
+
+        private enum Columns { Name, Lvl, Supply, Demand, MinSale, MaxBuy, Margin };
+        private Columns currentSortColumn = Columns.Name;
+        private bool sortAscending = true;
 
         /// <summary>
         /// A list of available types to filter search results
@@ -327,7 +330,136 @@ namespace BlackLionTrader
             {
                 displayItems.Add(new DisplayItem(item));
             }
-            return displayItems;
+            List<DisplayItem> sortedList = new List<DisplayItem>();
+            switch(currentSortColumn)
+            {
+                case Columns.Name:
+                    sortedList = displayItems.OrderBy(item => item.Name).ToList();
+                    break;
+
+                case Columns.Lvl:
+                    sortedList = displayItems.OrderBy(item => item.Level).ToList();
+                    break;
+
+                case Columns.Supply:
+                    sortedList = displayItems.OrderBy(item => item.Supply).ToList();
+                    break;
+
+                case Columns.Demand:
+                    sortedList = displayItems.OrderBy(item => item.Demand).ToList();
+                    break;
+
+                case Columns.MinSale:
+                    sortedList = displayItems.OrderBy(item => Int32.Parse(item.MinSaleOffer)).ToList();
+                    break;
+
+                case Columns.MaxBuy:
+                    sortedList = displayItems.OrderBy(item => Int32.Parse(item.MaxBuyOffer)).ToList();
+                    break;
+
+                case Columns.Margin:
+                    sortedList = displayItems.OrderBy(item => Int32.Parse(item.Margin)).ToList();
+                    break;
+
+                default:
+                    break;
+            }
+            if(!sortAscending)
+            {
+                sortedList.Reverse();
+            }
+
+            return sortedList;
+        }
+
+        /// <summary>
+        /// Changes the column that items are sorted by
+        /// </summary>
+        /// <param name="id">The int value of a corresponding enum in Columns</param>
+        public void changeSortColumn(int id)
+        {
+            switch(id)
+            {
+                case (int)Columns.Name:
+                    if((int)currentSortColumn == id)
+                    {
+                        sortAscending = !sortAscending;
+                    }
+                    else
+                    {
+                        currentSortColumn = Columns.Name;
+                    }
+                    break;
+
+                case (int)Columns.Lvl:
+                    if((int)currentSortColumn == id)
+                    {
+                        sortAscending = !sortAscending;
+                    }
+                    else
+                    {
+                        currentSortColumn = Columns.Lvl;
+                    }
+                    break;
+
+                case (int)Columns.Supply:
+                    if((int)currentSortColumn == id)
+                    {
+                        sortAscending = !sortAscending;
+                    }
+                    else
+                    {
+                        currentSortColumn = Columns.Supply;
+                    }
+                    break;
+
+                case (int)Columns.Demand:
+                    if((int)currentSortColumn == id)
+                    {
+                        sortAscending = !sortAscending;
+                    }
+                    else
+                    {
+                        currentSortColumn = Columns.Demand;
+                    }
+                    break;
+
+                case (int)Columns.MinSale:
+                    if((int)currentSortColumn == id)
+                    {
+                        sortAscending = !sortAscending;
+                    }
+                    else
+                    {
+                        currentSortColumn = Columns.MinSale;
+                    }
+                    break;
+
+                case (int)Columns.MaxBuy:
+                    if((int)currentSortColumn == id)
+                    {
+                        sortAscending = !sortAscending;
+                    }
+                    else
+                    {
+                        currentSortColumn = Columns.MaxBuy;
+                    }
+                    break;
+
+                case (int)Columns.Margin:
+                    if((int)currentSortColumn == id)
+                    {
+                        sortAscending = !sortAscending;
+                    }
+                    else
+                    {
+                        currentSortColumn = Columns.Margin;
+                    }
+                    break;
+
+                default:
+                    break;
+            }
         }
     }
 }

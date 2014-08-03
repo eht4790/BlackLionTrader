@@ -354,25 +354,56 @@
                         </StackPanel>
                         
                         <!---Row 3 Labels for Items List-->
-                        <Grid x:Name="ListBoxLabels" Grid.Row="3" Margin="0, 20, 0, 0" Loaded="ListBoxLabels_Loaded">
+                        <Grid x:Name="ListBoxLabels" Grid.Row="3" Margin="0, 20, 0, 0" Loaded="ListBoxLabels_Loaded" >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="30" />
+                                <ColumnDefinition Width="40" />
                                 <ColumnDefinition Width="75" />
-                                <ColumnDefinition Width="114" />
+                                <ColumnDefinition Width="95" />
                                 <ColumnDefinition Width="154" />
-                                <ColumnDefinition Width="154" />
-                                <ColumnDefinition Width="90" />
-                                <ColumnDefinition Width="80" />
+                                <ColumnDefinition Width="184" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="60" />
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="Name" FontSize="20" FontWeight="Bold" Margin="0, 0, 0, 0"/>
-                            <TextBlock Grid.Column="1" Text="Lvl" FontSize="20" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="2" Text="Supply" FontSize="20" FontWeight="Bold" />
-                            <TextBlock Grid.Column="3" Text="Demand" FontSize="20" FontWeight="Bold" />
-                            <TextBlock Grid.Column="4" Text="Min Sale Offer" FontSize="20" FontWeight="Bold" />
-                            <TextBlock Grid.Column="5" Text="Max Buy Offer" FontSize="20" FontWeight="Bold" />
-                            <TextBlock Grid.Column="6" Text="Margin" FontSize="20" FontWeight="Bold" />
-                            <TextBlock Grid.Column="7" Text="Watch" FontSize="20" FontWeight="Bold" />
+                            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                <TextBlock x:Name="NameLabel" Text="Name" FontSize="16" FontWeight="Bold" Margin="0, 0, 0, 0" Tapped="NameLabel_Tapped" />
+                                <Image x:Name="NameArrow" Source="/SharedAssets/up.png" Width="20" Height="15" Loaded="NameArrow_Loaded" />
+                            </StackPanel>
+                            
+                            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                <TextBlock x:Name="LvlLabel" Text="Lvl" FontSize="16" FontWeight="Bold" Tapped="LvlLabel_Tapped" />
+                                <Image x:Name="LvlArrow" Source="/SharedAssets/up.png" Width="20" Height="15" Loaded="LvlArrow_Loaded" Visibility="Collapsed"/>
+                            </StackPanel>
+                            
+                            <StackPanel Grid.Column="2" Orientation="Horizontal">
+                                <TextBlock x:Name="SupplyLabel" Text="Supply" FontSize="16" FontWeight="Bold" Tapped="SupplyLabel_Tapped" />
+                                <Image x:Name="SupplyArrow"  Source="/SharedAssets/up.png" Width="20" Height="15" Loaded="SupplyArrow_Loaded" Visibility="Collapsed"/>
+                            </StackPanel>
+                            
+                            <StackPanel Grid.Column="3" Orientation="Horizontal">
+                                <TextBlock x:Name="DemandLabel" Text="Demand" FontSize="16" FontWeight="Bold" Tapped="DemandLabel_Tapped" />
+                                <Image x:Name="DemandArrow" Source="/SharedAssets/up.png" Width="20" Height="15" Loaded="DemandArrow_Loaded" Visibility="Collapsed"/>
+                            </StackPanel>
+                            
+                            <StackPanel Grid.Column="4" Orientation="Horizontal">
+                                <TextBlock x:Name="MinSaleLabel" Text="Min Sale Offer" FontSize="16" FontWeight="Bold" Tapped="MinSaleLabel_Tapped" />
+                                <Image x:Name="MinSaleArrow" Source="/SharedAssets/up.png" Width="20" Height="15" Loaded="MinSaleArrow_Loaded" Visibility="Collapsed"/>
+                            </StackPanel>
+                            
+                            <StackPanel Grid.Column="5" Orientation="Horizontal">
+                                <TextBlock x:Name="MaxBuyLabel" Text="Max Buy Offer" FontSize="16" FontWeight="Bold" Tapped="MaxBuyLabel_Tapped" />
+                                <Image x:Name="MaxBuyArrow" Source="/SharedAssets/up.png" Width="20" Height="15" Loaded="MaxBuyArrow_Loaded" Visibility="Collapsed"/>
+                            </StackPanel>
+                            
+                            <StackPanel Grid.Column="6" Orientation="Horizontal">
+                                <TextBlock x:Name="MarginLabel" Text="Margin" FontSize="16" FontWeight="Bold" Tapped="MarginLabel_Tapped" />
+                                <Image x:Name="MaringArrow" Source="/SharedAssets/up.png" Width="20" Height="15" Loaded="MaringArrow_Loaded" Visibility="Collapsed"/>
+                            </StackPanel>
+                            
+                            <StackPanel Grid.Column="7" Orientation="Horizontal">
+                                <TextBlock Text="Watch" FontSize="16" FontWeight="Bold" />
+                            </StackPanel>
+                            
                         </Grid>
                         
                         <!--Row 4 Items List-->
@@ -389,7 +420,7 @@
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="35" />
+                                            <ColumnDefinition Width="55" />
                                             <ColumnDefinition Width="65" />
                                             <ColumnDefinition Width="65" />
                                             <ColumnDefinition Width="60" />

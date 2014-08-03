@@ -39,6 +39,7 @@ using Windows.UI;
 using System.Collections.ObjectModel;
 using Windows.UI.Popups;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Media.Imaging;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -49,15 +50,33 @@ namespace BlackLionTrader
     /// </summary>
     public sealed partial class MainPage : Page
     {
-
+        // Binding collections
         private ObservableCollection<string> types = new ObservableCollection<string>();
         private ObservableCollection<string> subtypes = new ObservableCollection<string>();
         private ObservableCollection<Rarity> rarities = new ObservableCollection<Rarity>();
         private ObservableCollection<DisplayItem> items = new ObservableCollection<DisplayItem>();
+
+        // Reference to Application
         private App app = Application.Current as App;
+
+        // References to UI Controls the DataContext
         private TextBox searchBox;
         private ProgressRing progressRing;
         private ComboBox subtypesCB;
+
+        // Used to track the state of arrow images used in sorting by columns
+        private enum Columns { Name, Lvl, Supply, Demand, MinSale, MaxBuy, Margin };
+        private Columns prevSortColumn = Columns.Name;
+        private bool sortAscending = true;
+
+        // References to sort arrows images in the Search Hub section
+        private Image nameArrow;
+        private Image lvlArrow;
+        private Image supplyArrow;
+        private Image demandArrow;
+        private Image minSaleArrow;
+        private Image maxBuyArrow;
+        private Image marginArrow;
 
         /// <summary>
         /// A collection of strings with all the various item types
@@ -179,11 +198,94 @@ namespace BlackLionTrader
             itemsListBox.Width = (Int32)(width * .83);
         }
 
+        /// <summary>
+        /// Sets the width of the grid that stores the list labels
+        /// to a fraction of the actual screen.
+        /// </summary>
+        /// <param name="sender">The grid of labels ListBoxLabels</param>
+        /// <param name="e">Event Data</param>
         private void ListBoxLabels_Loaded(object sender, RoutedEventArgs e)
         {
             Grid listBoxLabels = (Grid)sender;
             double width = Window.Current.Bounds.Width;
             listBoxLabels.Width = (Int32)(width * .83);
+        }
+
+        /// <summary>
+        /// Stores a reference to the NameArrow image used to mark that items
+        /// are sorted by name.
+        /// </summary>
+        /// <param name="sender">The NameArrow Image</param>
+        /// <param name="e">Event Data</param>
+        private void NameArrow_Loaded(object sender, RoutedEventArgs e)
+        {
+            nameArrow = (Image)sender;
+        }
+
+        /// <summary>
+        /// Stores a reference to the LvlArrow image used to mark that items
+        /// are sorted by level.
+        /// </summary>
+        /// <param name="sender">The LvlArrow Image</param>
+        /// <param name="e">Event Data</param>
+        private void LvlArrow_Loaded(object sender, RoutedEventArgs e)
+        {
+            lvlArrow = (Image)sender;
+        }
+
+        /// <summary>
+        /// Stores a reference to the SupplyArrow image used to mark that items
+        /// are sorted by supply.
+        /// </summary>
+        /// <param name="sender">The SupplyArrow Image</param>
+        /// <param name="e">Event Data</param>
+        private void SupplyArrow_Loaded(object sender, RoutedEventArgs e)
+        {
+            supplyArrow = (Image)sender;
+        }
+
+        /// <summary>
+        /// Stores a reference to the DemandArrow image used to mark that items
+        /// are sorted by demand.
+        /// </summary>
+        /// <param name="sender">The DemandArrow Image</param>
+        /// <param name="e">Event Data</param>
+        private void DemandArrow_Loaded(object sender, RoutedEventArgs e)
+        {
+            demandArrow = (Image)sender;
+        }
+
+        /// <summary>
+        /// Stores a reference to the MinSaleArrow image used to mark that items
+        /// are sorted by min sale offer.
+        /// </summary>
+        /// <param name="sender">The MinSaleArrow Image</param>
+        /// <param name="e">Event Data</param>
+        private void MinSaleArrow_Loaded(object sender, RoutedEventArgs e)
+        {
+            minSaleArrow = (Image)sender;
+        }
+
+        /// <summary>
+        /// Stores a reference to the MaxBuyArrow image used to mark that items
+        /// are sorted by max buy offer.
+        /// </summary>
+        /// <param name="sender">The MaxBuyArrow Image</param>
+        /// <param name="e">Event Data</param>
+        private void MaxBuyArrow_Loaded(object sender, RoutedEventArgs e)
+        {
+            maxBuyArrow = (Image)sender;
+        }
+
+        /// <summary>
+        /// Stores a reference to the MarginArrow image used to mark that items
+        /// are sorted by margin.
+        /// </summary>
+        /// <param name="sender">The MarginArrow Image</param>
+        /// <param name="e">Event Data</param>
+        private void MaringArrow_Loaded(object sender, RoutedEventArgs e)
+        {
+            marginArrow = (Image)sender;
         }
 
         /// <summary>
@@ -381,6 +483,12 @@ namespace BlackLionTrader
             progressRing.IsActive = false;
         }
 
+        /// <summary>
+        /// Sends a search call to the controller to find the list of items with the
+        /// search conditions selected in the UI
+        /// </summary>
+        /// <param name="itemName"></param>
+        /// <returns></returns>
         private async Task<List<DisplayItem>> runSearch(string itemName)
         {
             try
@@ -404,6 +512,224 @@ namespace BlackLionTrader
             msg.Title = "Oops!";
             await msg.ShowAsync();
             Application.Current.Exit();
+        }
+
+        /// <summary>
+        /// Sorts the list of items according to name
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void NameLabel_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            nameArrow.Visibility = Visibility.Visible;
+            sortBy(Columns.Name);
+        }
+
+        /// <summary>
+        /// Sorts the list of items according to restriction level
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void LvlLabel_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            lvlArrow.Visibility = Visibility.Visible;
+            sortBy(Columns.Lvl);
+        }
+
+        /// <summary>
+        /// Sorts the list of items according to supply
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SupplyLabel_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            supplyArrow.Visibility = Visibility.Visible;
+            sortBy(Columns.Supply);
+        }
+
+        /// <summary>
+        /// Sorts the list of items according to demand
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DemandLabel_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            demandArrow.Visibility = Visibility.Visible;
+            sortBy(Columns.Demand);
+        }
+
+        /// <summary>
+        /// Sorts the list of items according to min sale offer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MinSaleLabel_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            minSaleArrow.Visibility = Visibility.Visible;
+            sortBy(Columns.MinSale);
+        }
+
+        /// <summary>
+        /// Sorts the list of items according to max buy offer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MaxBuyLabel_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            maxBuyArrow.Visibility = Visibility.Visible;
+            sortBy(Columns.MaxBuy);
+        }
+
+        /// <summary>
+        /// Sorts the list of items according the difference between the min sale offer and the max buy offer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MarginLabel_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            marginArrow.Visibility = Visibility.Visible;
+            sortBy(Columns.Margin);
+        }
+
+        /// <summary>
+        /// Sorts the item list by the given column and marks the given column
+        /// with the appropriate arrow to signify sorting
+        /// </summary>
+        /// <param name="column">The column that was selected for sorting</param>
+        private void sortBy(Columns column)
+        {
+            List<DisplayItem> results = app.controller.sortByColumn((int)column);
+            items.Clear();
+            foreach(DisplayItem result in results)
+            {
+                items.Add(result);
+            }
+
+            if(column == prevSortColumn)
+            {
+                sortAscending = !sortAscending;
+            }
+
+            else
+            {
+                switch (prevSortColumn)
+                {
+                    case Columns.Name:
+                        nameArrow.Visibility = Visibility.Collapsed;
+                        break;
+
+                    case Columns.Lvl:
+                        lvlArrow.Visibility = Visibility.Collapsed;
+                        break;
+
+                    case Columns.Supply:
+                        supplyArrow.Visibility = Visibility.Collapsed;
+                        break;
+
+                    case Columns.Demand:
+                        demandArrow.Visibility = Visibility.Collapsed;
+                        break;
+
+                    case Columns.MinSale:
+                        minSaleArrow.Visibility = Visibility.Collapsed;
+                        break;
+
+                    case Columns.MaxBuy:
+                        maxBuyArrow.Visibility = Visibility.Collapsed;
+                        break;
+
+                    case Columns.Margin:
+                        marginArrow.Visibility = Visibility.Collapsed;
+                        break;
+
+                    default:
+                        break;
+                }
+                prevSortColumn = column;
+            }
+
+            switch(column)
+            {
+                case Columns.Name:
+                    if(sortAscending)
+                    {
+                        nameArrow.Source = new BitmapImage(new Uri("ms-appx:/SharedAssets/up.png", UriKind.Absolute));
+                    }
+                    else
+                    {
+                        nameArrow.Source = new BitmapImage(new Uri("ms-appx:/SharedAssets/down.png", UriKind.Absolute));
+                    }
+                    break;
+
+                case Columns.Lvl:
+                    if(sortAscending)
+                    {
+                        lvlArrow.Source = new BitmapImage(new Uri("ms-appx:/SharedAssets/up.png", UriKind.Absolute));
+                    }
+                    else
+                    {
+                        lvlArrow.Source = new BitmapImage(new Uri("ms-appx:/SharedAssets/down.png", UriKind.Absolute));
+                    }
+                    break;
+
+                case Columns.Supply:
+                    if(sortAscending)
+                    {
+                        supplyArrow.Source = new BitmapImage(new Uri("ms-appx:/SharedAssets/up.png", UriKind.Absolute));
+                    }
+                    else
+                    {
+                        supplyArrow.Source = new BitmapImage(new Uri("ms-appx:/SharedAssets/down.png", UriKind.Absolute));
+                    }
+                    break;
+
+                case Columns.Demand:
+                    if(sortAscending)
+                    {
+                        demandArrow.Source = new BitmapImage(new Uri("ms-appx:/SharedAssets/up.png", UriKind.Absolute));
+                    }
+                    else
+                    {
+                        demandArrow.Source = new BitmapImage(new Uri("ms-appx:/SharedAssets/down.png", UriKind.Absolute));
+                    }
+                    break;
+
+                case Columns.MinSale:
+                    if(sortAscending)
+                    {
+                        minSaleArrow.Source = new BitmapImage(new Uri("ms-appx:/SharedAssets/up.png", UriKind.Absolute));
+                    }
+                    else
+                    {
+                        minSaleArrow.Source = new BitmapImage(new Uri("ms-appx:/SharedAssets/down.png", UriKind.Absolute));
+                    }
+                    break;
+
+                case Columns.MaxBuy:
+                    if(sortAscending)
+                    {
+                        maxBuyArrow.Source = new BitmapImage(new Uri("ms-appx:/SharedAssets/up.png", UriKind.Absolute));
+                    }
+                    else
+                    {
+                        maxBuyArrow.Source = new BitmapImage(new Uri("ms-appx:/SharedAssets/down.png", UriKind.Absolute));
+                    }
+                    break;
+
+                case Columns.Margin:
+                    if(sortAscending)
+                    {
+                        marginArrow.Source = new BitmapImage(new Uri("ms-appx:/SharedAssets/up.png", UriKind.Absolute));
+                    }
+                    else
+                    {
+                        marginArrow.Source = new BitmapImage(new Uri("ms-appx:/SharedAssets/down.png", UriKind.Absolute));
+                    }
+                    break;
+
+                default:
+                    break;
+            }
         }
     }
 }

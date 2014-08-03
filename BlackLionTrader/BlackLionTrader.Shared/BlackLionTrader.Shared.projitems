@@ -25,9 +25,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)SharedAssets\copper.png" />
+    <Content Include="$(MSBuildThisFileDirectory)SharedAssets\down.png" />
     <Content Include="$(MSBuildThisFileDirectory)SharedAssets\gold.png" />
     <Content Include="$(MSBuildThisFileDirectory)SharedAssets\silver.png" />
     <Content Include="$(MSBuildThisFileDirectory)SharedAssets\unwatch.png" />
+    <Content Include="$(MSBuildThisFileDirectory)SharedAssets\up.png" />
     <Content Include="$(MSBuildThisFileDirectory)SharedAssets\watch.png" />
   </ItemGroup>
 </Project>

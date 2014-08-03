@@ -179,5 +179,17 @@ namespace BlackLionTrader
                 throw e;
             }
         }
+
+        /// <summary>
+        /// Adjusts the currently selected column to sort by in the model and returns a
+        /// list of Display items sorted in the appropriate order.
+        /// </summary>
+        /// <param name="id"> The id of the column which corresponds to an enum in the Search Model</param>
+        /// <returns></returns>
+        public List<DisplayItem> sortByColumn(int id)
+        {
+            searchModel.changeSortColumn(id);
+            return searchModel.getDisplayItems();
+        }
     }
 }
