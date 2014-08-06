@@ -16,7 +16,7 @@ Current Goals
 __Search Hub Section__
 
 1. Add Favorites Button functionality to items in ListBox
-2. Sortable Columns
+2. Clicking an item in the results list navigates to an Item Page
 
 __Item Page__
 
