@@ -27,6 +27,7 @@ namespace BlackLionTrader
 {
     public class DisplayItem
     {
+        private int id;
         private string img;
         private string name;
         private int level;
@@ -56,6 +57,14 @@ namespace BlackLionTrader
         private string marginGold;
         private string marginGoldImg = null;
         private bool watched = false;
+
+        /// <summary>
+        /// The id of the item
+        /// </summary>
+        public int ID
+        {
+            get { return id; }
+        }
 
         /// <summary>
         /// The url of the image associate with the file
