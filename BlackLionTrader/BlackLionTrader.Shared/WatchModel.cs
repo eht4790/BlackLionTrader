@@ -28,10 +28,60 @@ namespace BlackLionTrader
     public class WatchModel
     {
         private JsonHelper jsonHelper;
+        private Dictionary<int, Item> favorites = new Dictionary<int, Item>();
+
+        /// <summary>
+        /// A Dictionary of Items that were saved as favorites.
+        /// The key is the item name and the value is the corresponding
+        /// Item object.
+        /// </summary>
+        public Dictionary<int, Item> Favorites
+        {
+            get { return favorites; }
+        }
 
         public WatchModel(JsonHelper jsonHelper)
         {
             this.jsonHelper = jsonHelper;
+        }
+
+        /// <summary>
+        /// Adds the given item to the favorites Dictionary
+        /// </summary>
+        /// <param name="item">The Item object to be added</param>
+        public void addItem(Item item)
+        {
+            favorites.Add(item.ID, item);
+        }
+
+        /// <summary>
+        /// Removes the value of the given item ID from the
+        /// the favorites Dictionary
+        /// </summary>
+        /// <param name="id">The id of the Item to be removed</param>
+        public void removeItem(int id)
+        {
+            favorites.Remove(id);
+        }
+
+        /// <summary>
+        /// Returns the corresponding Item of the given id
+        /// </summary>
+        /// <param name="id">The id of the desired item</param>
+        /// <returns>The corresponding Item object</returns>
+        public Item getItem(int id)
+        {
+            return favorites[id];
+        }
+
+        /// <summary>
+        /// Returns the corresponding DisplayItem of the given id
+        /// </summary>
+        /// <param name="id">The id fo the desered item</param>
+        /// <returns>The a DisplayItem object of the given id</returns>
+        public DisplayItem getDisplayItem(int id)
+        {
+            return new DisplayItem(favorites[id]);
         }
     }
 }
