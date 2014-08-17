@@ -34,7 +34,7 @@ namespace BlackLionTrader
         private List<Type> types = new List<Type>();
         private List<Subtype> subtypes = new List<Subtype>();
         private List<Rarity> rarities = new List<Rarity>();
-        private List<Item> searchResults = new List<Item>();
+        private Dictionary<int, Item> searchResults = new Dictionary<int, Item>();
 
         private Type currentType = null;
         private Subtype currentSubtype = null;
@@ -69,14 +69,6 @@ namespace BlackLionTrader
         public List<Rarity> Rarities
         {
             get { return rarities; }
-        }
-
-        /// <summary>
-        /// A list of items that match the search parameters
-        /// </summary>
-        public List<Item> SearchResults
-        {
-            get { return searchResults; }
         }
 
         /// <summary>
@@ -266,7 +258,10 @@ namespace BlackLionTrader
                     linqResults = linqResults.Where(item => item.RarityId == currentRarity.ID);
                 }
 
-                searchResults = linqResults.ToList();
+                foreach(Item item in linqResults)
+                {
+                    searchResults.Add(item.ID, item);
+                }
             }
             catch(Exception e)
             {
@@ -310,7 +305,10 @@ namespace BlackLionTrader
                         linqResults = linqResults.Where(item => item.RarityId == currentRarity.ID);
                     }
 
-                    searchResults = linqResults.ToList();
+                    foreach (Item item in linqResults)
+                    {
+                        searchResults.Add(item.ID, item);
+                    }
                 }
                 catch (Exception e)
                 {
@@ -326,7 +324,7 @@ namespace BlackLionTrader
         public List<DisplayItem> getDisplayItems()
         {
             List<DisplayItem> displayItems = new List<DisplayItem>();
-            foreach(Item item in searchResults)
+            foreach(Item item in searchResults.Values)
             {
                 displayItems.Add(new DisplayItem(item));
             }
