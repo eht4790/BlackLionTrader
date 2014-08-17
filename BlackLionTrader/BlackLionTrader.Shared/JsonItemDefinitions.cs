@@ -204,7 +204,7 @@ namespace BlackLionTrader
         /// <summary>
         /// The unique id of the item
         /// </summary>
-        public int DataId
+        public int ID
         {
             get { return data_id; }
         }
