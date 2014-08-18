@@ -30,16 +30,6 @@ namespace BlackLionTrader
         private JsonHelper jsonHelper;
         private Dictionary<int, Item> favorites = new Dictionary<int, Item>();
 
-        /// <summary>
-        /// A Dictionary of Items that were saved as favorites.
-        /// The key is the item name and the value is the corresponding
-        /// Item object.
-        /// </summary>
-        public Dictionary<int, Item> Favorites
-        {
-            get { return favorites; }
-        }
-
         public WatchModel(JsonHelper jsonHelper)
         {
             this.jsonHelper = jsonHelper;
@@ -62,6 +52,17 @@ namespace BlackLionTrader
         public void removeItem(int id)
         {
             favorites.Remove(id);
+        }
+
+        /// <summary>
+        /// Returns whether or not the item of the given id exists in the
+        /// the favorites Dicitonary
+        /// </summary>
+        /// <param name="id">The id of the item to check</param>
+        /// <returns>True if the item exists, false otherwise</returns>
+        public bool contains(int id)
+        {
+            return favorites.ContainsKey(id);
         }
 
         /// <summary>
