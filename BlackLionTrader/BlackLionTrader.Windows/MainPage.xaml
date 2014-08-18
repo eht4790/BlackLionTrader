@@ -177,7 +177,7 @@
                                         <Image Grid.Column="20" Source="{Binding MarginSilverImg}" />
                                         <TextBlock Grid.Column="21" Text="{Binding MarginCopper}" HorizontalAlignment="Right"/>
                                         <Image Grid.Column="22" Source="{Binding MarginCopperImg}" Margin="0, 0, 30, 0"/>
-                                        <Image Grid.Column="23" Source="{Binding WatchImg}" Margin="0, 0, 20, 0"/>
+                                        <Image Grid.Column="23" Source="{Binding WatchImg}" Margin="0, 0, 20, 0" Tapped="WatchImage_Tapped"/>
                                     </Grid>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>

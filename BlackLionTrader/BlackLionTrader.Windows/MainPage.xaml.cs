@@ -731,5 +731,16 @@ namespace BlackLionTrader
                     break;
             }
         }
+
+        /// <summary>
+        /// Event Handler for tapping the watch/unwatch image in the list of search results.
+        /// Makes a call to the controller to add/remove the item from the favorites list
+        /// </summary>
+        /// <param name="sender">The watch/unwatch Image that was tapped</param>
+        /// <param name="e">Event Data</param>
+        private void WatchImage_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            
+        }
     }
 }
