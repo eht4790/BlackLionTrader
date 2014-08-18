@@ -191,5 +191,24 @@ namespace BlackLionTrader
             searchModel.changeSortColumn(id);
             return searchModel.getDisplayItems();
         }
+
+        /// <summary>
+        /// Adds the item of the given id in the SearchModel to the list of favorites
+        /// in the WatchModel
+        /// </summary>
+        /// <param name="id">The id of the item to be added</param>
+        public void addFavorite(int id)
+        {
+            watchModel.addItem(searchModel.getItem(id));
+        }
+
+        /// <summary>
+        /// Removes the item of the given id from the list of favorites in the WatchModel
+        /// </summary>
+        /// <param name="id">The id of the item to be removed</param>
+        public void removeFavorite(int id)
+        {
+            watchModel.removeItem(id);
+        }
     }
 }

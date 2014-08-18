@@ -459,5 +459,15 @@ namespace BlackLionTrader
                     break;
             }
         }
+
+        /// <summary>
+        /// Returns the Item object with the given id
+        /// </summary>
+        /// <param name="id">The id of the desired item in the list results</param>
+        /// <returns>The Item object that corresponds to the given id</returns>
+        public Item getItem(int id)
+        {
+            return searchResults[id];
+        }
     }
 }
