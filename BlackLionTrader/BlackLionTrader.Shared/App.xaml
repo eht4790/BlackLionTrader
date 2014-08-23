@@ -9,10 +9,10 @@
             <!--Changes to color themes-->
             <SolidColorBrush x:Key="ComboBoxItemSelectedBackgroundThemeBrush" Color="Red" />
             <SolidColorBrush x:Key="ComboBoxItemSelectedPointerOverBackgroundThemeBrush" Color="Red" />
-            <SolidColorBrush x:Key="TextSelectionHighlightColorThemeBrush" Color="Red"/>
-            <SolidColorBrush x:Key="ListBoxItemPressedBackgroundThemeBrush" Color="Red" />
-            <SolidColorBrush x:Key="ListBoxItemSelectedBackgroundThemeBrush" Color="Red" />
-            <SolidColorBrush x:Key="ListBoxItemSelectedPointerOverBackgroundThemeBrush" Color="Red" />
+            <SolidColorBrush x:Key="TextSelectionHighlightColorThemeBrush" Color="Red" Opacity=".65"/>
+            <SolidColorBrush x:Key="ListBoxItemPressedBackgroundThemeBrush" Color="Red" Opacity=".65"/>
+            <SolidColorBrush x:Key="ListBoxItemSelectedBackgroundThemeBrush" Color="Red" Opacity=".65"/>
+            <SolidColorBrush x:Key="ListBoxItemSelectedPointerOverBackgroundThemeBrush" Color="Red" Opacity=".65"/>
             <SolidColorBrush x:Key="ListBoxFocusBackgroundThemeBrush"  Color="#FFFFFF" Opacity=".75"/>
 
             <!--Custom Button Template to remove PointerOver animation-->
