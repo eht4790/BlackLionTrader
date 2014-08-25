@@ -55,6 +55,7 @@ namespace BlackLionTrader
         private ObservableCollection<string> subtypes = new ObservableCollection<string>();
         private ObservableCollection<Rarity> rarities = new ObservableCollection<Rarity>();
         private ObservableCollection<DisplayItem> items = new ObservableCollection<DisplayItem>();
+        private ObservableCollection<DisplayItem> watchItems = new ObservableCollection<DisplayItem>();
 
         // Reference to Application
         private App app = Application.Current as App;
@@ -108,6 +109,11 @@ namespace BlackLionTrader
         public ObservableCollection<DisplayItem> Items
         {
             get { return items; }
+        }
+
+        public ObservableCollection<DisplayItem> WatchItems
+        {
+            get { return watchItems; }
         }
 
         public MainPage()
@@ -297,7 +303,7 @@ namespace BlackLionTrader
         private void ItemSearchBox_GotFocus(object sender, RoutedEventArgs e)
         {
             TextBox searchBox = (TextBox)sender;
-            if(searchBox.Text.Equals("Item Name"))
+            if(searchBox.Text.Equals("Item Name..."))
             {
                 searchBox.Text = string.Empty;
                 searchBox.Foreground = new SolidColorBrush(Colors.Black);
@@ -315,7 +321,7 @@ namespace BlackLionTrader
             TextBox searchBox = (TextBox)sender;
             if (searchBox.Text.Equals(""))
             {
-                searchBox.Text = "Item Name";
+                searchBox.Text = "Item Name...";
                 searchBox.Foreground = new SolidColorBrush(Colors.Gray);
             }
         }
@@ -462,7 +468,7 @@ namespace BlackLionTrader
         {
             progressRing.IsActive = true;
             string itemName = searchBox.Text;
-            if(!itemName.Equals("Item Name"))
+            if(!itemName.Equals("Item Name..."))
             {
                 items.Clear();
                 List<DisplayItem> results = await Task.Run(() => runSearch(itemName));
@@ -741,6 +747,48 @@ namespace BlackLionTrader
         private void WatchImage_Tapped(object sender, TappedRoutedEventArgs e)
         {
             
+        }
+
+        /// <summary>
+        /// Event handler for gaining focus from the WatchSearchBox. Restores default
+        /// text if empty.
+        /// </summary>
+        /// <param name="sender">The WatchSearchBox in the Watch hub section</param>
+        /// <param name="e">Event data</param>
+        private void WatchSearchBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox searchBox = (TextBox)sender;
+            if (searchBox.Text.Equals("Item Name..."))
+            {
+                searchBox.Text = string.Empty;
+                searchBox.Foreground = new SolidColorBrush(Colors.Black);
+            }
+        }
+
+        /// <summary>
+        /// Event handler for removing focus from the WatchSearchBox. Restores default
+        /// text if empty.
+        /// </summary>
+        /// <param name="sender">The WatchSearchBox in the Watch hub section</param>
+        /// <param name="e">Event data</param>
+        private void WatchSearchBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox searchBox = (TextBox)sender;
+            if (searchBox.Text.Equals(""))
+            {
+                searchBox.Text = "Item Name...";
+                searchBox.Foreground = new SolidColorBrush(Colors.Gray);
+            }
+        }
+
+        /// <summary>
+        /// Dynamically filters the visible list of items in the WatchList based on the text entered
+        /// </summary>
+        /// <param name="sender">The WatchSearchBox in the Watch hub section</param>
+        /// <param name="e">Event data</param>
+        private void WatchSearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }

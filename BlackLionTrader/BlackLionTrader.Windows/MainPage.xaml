@@ -34,7 +34,7 @@
                         <!--Row 0 Search Box-->
                         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0, 0, 0, 20">
                             <TextBox x:Name="ItemSearchBox" BorderBrush="Black" Width="400" Margin="0, 5, 0, 5" 
-                                     Foreground="Gray" Text="Item Name" MaxLength="40"
+                                     Foreground="Gray" Text="Item Name..." MaxLength="50"
                                      GotFocus="ItemSearchBox_GotFocus" LostFocus="ItemSearchBox_LostFocus" Loaded="ItemSearchBox_Loaded"/>
                             <Button x:Name="SearchBtn" Content="Search" Width="94" Height="40" BorderBrush="Black" Foreground="Black" Background="White" Click="SearchBtn_Click" />
                             <ProgressRing IsActive="False" Foreground="Red"  Loaded="ProgressRing_Loaded" Width="50" Height="50"/>
@@ -191,12 +191,91 @@
                 <HubSection.Header>
                     <TextBlock Text="Watch" FontSize="40" FontWeight="Bold" Foreground="Red"/>
                 </HubSection.Header>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        
+                        <!--Row 0 Search Watch List-->
+                        <TextBox x:Name="WatchSearchBox" Grid.Row="0" BorderBrush="Black" Width="400" Margin="0, 5, 0, 5" 
+                                 Foreground="Gray" Text="Item Name..." MaxLength="50" HorizontalAlignment="Left"
+                                 GotFocus="WatchSearchBox_GotFocus" LostFocus="WatchSearchBox_LostFocus" TextChanged="WatchSearchBox_TextChanged" />
+                        
+                        <!---Row 1 Watch List-->
+                        <ListBox x:Name="ItemsListBox" Grid.Row="1"  Margin="0, 10, 0, 30" HorizontalAlignment="Stretch"  VerticalAlignment="Top" ItemsSource="{Binding WatchItems}" Loaded="ItemsListBox_Loaded">
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid x:Name="ItemsListBoxGrid" >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="55" />
+                                            <ColumnDefinition Width="65" />
+                                            <ColumnDefinition Width="65" />
+                                            <ColumnDefinition Width="60" />
+                                            <ColumnDefinition Width="10" />
+                                            <ColumnDefinition Width="22" />
+                                            <ColumnDefinition Width="10" />
+                                            <ColumnDefinition Width="22" />
+                                            <ColumnDefinition Width="30" />
+                                            <ColumnDefinition Width="60" />
+                                            <ColumnDefinition Width="10" />
+                                            <ColumnDefinition Width="22" />
+                                            <ColumnDefinition Width="10" />
+                                            <ColumnDefinition Width="22" />
+                                            <ColumnDefinition Width="30" />
+                                            <ColumnDefinition Width="60" />
+                                            <ColumnDefinition Width="10" />
+                                            <ColumnDefinition Width="22" />
+                                            <ColumnDefinition Width="10" />
+                                            <ColumnDefinition Width="22" />
+                                            <ColumnDefinition Width="40" />
+                                            <ColumnDefinition Width="40" />
+                                        </Grid.ColumnDefinitions>
+                                        <Image Grid.Column="0" Height="40" Source="{Binding Img}" Margin="0, 0, 10, 0"/>
+                                        <TextBlock Grid.Column="1"  Text="{Binding Name}" Foreground="{Binding RarityColor}" Margin="0, 0, 10, 0"/>
+                                        <TextBlock Grid.Column="2" Text="{Binding Level}" />
+                                        <TextBlock Grid.Column="3" Text="{Binding Supply}" Margin="0, 0, 10, 0"/>
+                                        <TextBlock Grid.Column="4" Text="{Binding Demand}" Margin="0, 0, 10, 0"/>
+                                        <TextBlock Grid.Column="5" Text="{Binding MinSaleGold}"  HorizontalAlignment="Right"/>
+                                        <Image Grid.Column="6" Source="{Binding MinSaleGoldImg}" />
+                                        <TextBlock Grid.Column="7" Text="{Binding MinSaleSilver}" HorizontalAlignment="Right"/>
+                                        <Image Grid.Column="8" Source="{Binding MinSaleSilverImg}" />
+                                        <TextBlock Grid.Column="9" Text="{Binding MinSaleCopper}" HorizontalAlignment="Right"/>
+                                        <Image Grid.Column="10" Source="{Binding MinSaleCopperImg}" Margin="0, 0, 20, 0"/>
+                                        <TextBlock Grid.Column="11" Text="{Binding MaxBuyGold}" HorizontalAlignment="Right"/>
+                                        <Image Grid.Column="12" Source="{Binding MaxBuyGoldImg}" />
+                                        <TextBlock Grid.Column="13" Text="{Binding MaxBuySilver}" HorizontalAlignment="Right"/>
+                                        <Image Grid.Column="14" Source="{Binding MaxBuySilverImg}" />
+                                        <TextBlock Grid.Column="15" Text="{Binding MaxBuyCopper}" HorizontalAlignment="Right"/>
+                                        <Image Grid.Column="16" Source="{Binding MaxBuyCopperImg}"  Margin="0, 0, 20, 0"/>
+                                        <TextBlock Grid.Column="17" Text="{Binding MarginGold}" HorizontalAlignment="Right"/>
+                                        <Image Grid.Column="18" Source="{Binding MarginGoldImg}" />
+                                        <TextBlock Grid.Column="19" Text="{Binding MarginSilver}" HorizontalAlignment="Right"/>
+                                        <Image Grid.Column="20" Source="{Binding MarginSilverImg}" />
+                                        <TextBlock Grid.Column="21" Text="{Binding MarginCopper}" HorizontalAlignment="Right"/>
+                                        <Image Grid.Column="22" Source="{Binding MarginCopperImg}" Margin="0, 0, 30, 0"/>
+                                        <Image Grid.Column="23" Source="{Binding WatchImg}" Margin="0, 0, 20, 0" Tapped="WatchImage_Tapped"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Grid>
+                </DataTemplate>
             </HubSection>
             
             <!--Gems-->
             <HubSection x:Name="GemSection" Width="1250">
                 <HubSection.Header>
-                    <TextBlock Text="Gems" FontSize="40" FontWeight="Bold" Foreground="Red"/>
+                    <TextBlock Text="Gems" FontSize="40" FontWeight="Bold" Foreground="Red" />
                 </HubSection.Header>
             </HubSection>
         </Hub>
