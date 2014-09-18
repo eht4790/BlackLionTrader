@@ -84,5 +84,19 @@ namespace BlackLionTrader
         {
             return new DisplayItem(favorites[id]);
         }
+
+        /// <summary>
+        /// Rerturns a list of Values in the favorites Dictionary as DisplayItems
+        /// </summary>
+        /// <returns>A list of all the items that were favorited as DisplayItems</returns>
+        public List<DisplayItem> getFavorites()
+        {
+            List<DisplayItem> displayItems = new List<DisplayItem>();
+            foreach(Item item in favorites.Values)
+            {
+                displayItems.Add(new DisplayItem(item));
+            }
+            return displayItems;
+        }
     }
 }

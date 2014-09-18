@@ -194,12 +194,14 @@ namespace BlackLionTrader
 
         /// <summary>
         /// Adds the item of the given id in the SearchModel to the list of favorites
-        /// in the WatchModel
+        /// in the WatchModel and returns the new list of favorites for updating the UI.
         /// </summary>
         /// <param name="id">The id of the item to be added</param>
-        public void addFavorite(int id)
+        /// <returns>The new list of favorites as DisplayItems</returns>
+        public List<DisplayItem> addFavorite(int id)
         {
             watchModel.addItem(searchModel.getItem(id));
+            return watchModel.getFavorites();
         }
 
         /// <summary>

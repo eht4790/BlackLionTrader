@@ -64,6 +64,7 @@ namespace BlackLionTrader
         private TextBox searchBox;
         private ProgressRing progressRing;
         private ComboBox subtypesCB;
+        private ListBox itemsListBox;
 
         // Used to track the state of arrow images used in sorting by columns
         private enum Columns { Name, Lvl, Supply, Demand, MinSale, MaxBuy, Margin };
@@ -199,7 +200,7 @@ namespace BlackLionTrader
         /// <param name="e">Event Data</param>
         private void ItemsListBox_Loaded(object sender, RoutedEventArgs e)
         {
-            ListBox itemsListBox = (ListBox)sender;
+            itemsListBox = (ListBox)sender;
             double width = Window.Current.Bounds.Width;
             itemsListBox.Width = (Int32)(width * .83);
         }
@@ -746,7 +747,7 @@ namespace BlackLionTrader
         /// <param name="e">Event Data</param>
         private void WatchImage_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            
+
         }
 
         /// <summary>

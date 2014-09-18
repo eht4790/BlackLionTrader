@@ -260,7 +260,10 @@ namespace BlackLionTrader
 
                 foreach(Item item in linqResults)
                 {
-                    searchResults.Add(item.ID, item);
+                    if (!searchResults.ContainsKey(item.ID))
+                    {
+                        searchResults.Add(item.ID, item);
+                    }
                 }
             }
             catch(Exception e)
