@@ -313,8 +313,25 @@ namespace BlackLionTrader
             }
         }
 
+        /// <summary>
+        /// Gets/Sets whether the item exists in the favorites list
+        /// </summary>
+        public bool Watched
+        {
+            get
+            {
+                return watched;
+            }
+
+            set
+            {
+                watched = value;
+            }
+        }
+
         public DisplayItem(Item item)
         {
+            this.id = item.ID;
             this.img = item.Img;
             if(item.Name.Length > 34)
             {
