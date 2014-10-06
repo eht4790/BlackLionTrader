@@ -747,7 +747,18 @@ namespace BlackLionTrader
         /// <param name="e">Event Data</param>
         private void WatchImage_Tapped(object sender, TappedRoutedEventArgs e)
         {
-
+            Image img = (Image)sender;
+            DisplayItem item = (DisplayItem)(img.DataContext);
+            if(app.controller.containsFavorite(item.ID))
+            {
+                app.controller.removeFavorite(item.ID);
+                img.Source = new BitmapImage(new Uri("ms-appx:/SharedAssets/unwatch.png"));
+            }
+            else
+            {
+                app.controller.addFavorite(item.ID);
+                img.Source = new BitmapImage(new Uri("ms-appx:/SharedAssets/watch.png"));
+            }
         }
 
         /// <summary>
