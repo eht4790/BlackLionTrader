@@ -212,5 +212,15 @@ namespace BlackLionTrader
         {
             watchModel.removeItem(id);
         }
+
+        /// <summary>
+        /// Checks if the item of the given id already exists in the favorites list
+        /// </summary>
+        /// <param name="id">The id of the item to be checked</param>
+        /// <returns>True if the items exists in the favorites list, otherwise false</returns>
+        public bool containsFavorite(int id)
+        {
+            return watchModel.contains(id);
+        }
     }
 }
