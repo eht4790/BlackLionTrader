@@ -28,6 +28,7 @@ __Item Page__
 
 1. A page with information of a single item
 
+
 License
 -------
 Copyright (C) 2014  Eric Trumble
