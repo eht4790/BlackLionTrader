@@ -19,6 +19,7 @@ __Search Hub Section__
 2. Clicking an item in the results list navigates to an Item Page
 
 __Watch Hub Section__
+
 1. Add searching of the favorites list
 2. Add filtering of the favorites list
 3. Add sorting of the favorites list
