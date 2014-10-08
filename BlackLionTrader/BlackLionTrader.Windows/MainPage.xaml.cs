@@ -753,11 +753,13 @@ namespace BlackLionTrader
             {
                 app.controller.removeFavorite(item.ID);
                 img.Source = new BitmapImage(new Uri("ms-appx:/SharedAssets/unwatch.png"));
+                watchItems.Remove(item);
             }
             else
             {
                 app.controller.addFavorite(item.ID);
                 img.Source = new BitmapImage(new Uri("ms-appx:/SharedAssets/watch.png"));
+                watchItems.Add(item);
             }
         }
 
