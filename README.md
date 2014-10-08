@@ -18,6 +18,12 @@ __Search Hub Section__
 1. Add Favorites Button functionality to items in ListBox
 2. Clicking an item in the results list navigates to an Item Page
 
+__Watch Hub Section__
+
+1. Add searching of the favorites list
+2. Add filtering of the favorites list
+3. Add sorting of the favorites list
+
 __Item Page__
 
 1. A page with information of a single item
