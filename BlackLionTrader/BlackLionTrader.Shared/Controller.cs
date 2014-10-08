@@ -172,7 +172,12 @@ namespace BlackLionTrader
                 {
                     await searchModel.search(itemName);
                 }
-                return searchModel.getDisplayItems();
+                List<DisplayItem> items = searchModel.getDisplayItems();
+                foreach(DisplayItem item in items)
+                {
+                    item.Watched = containsFavorite(item.ID);
+                }
+                return items;
             }
             catch(Exception e)
             {
