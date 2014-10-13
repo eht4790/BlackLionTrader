@@ -31,9 +31,8 @@ namespace BlackLionTrader
     public class SearchModel
     {
         private JsonHelper jsonHelper;
-        private List<Type> types = new List<Type>();
+        private CommonResources resources;
         private List<Subtype> subtypes = new List<Subtype>();
-        private List<Rarity> rarities = new List<Rarity>();
         private Dictionary<int, Item> searchResults = new Dictionary<int, Item>();
 
         private Type currentType = null;
@@ -48,27 +47,11 @@ namespace BlackLionTrader
         private bool sortAscending = true;
 
         /// <summary>
-        /// A list of available types to filter search results
-        /// </summary>
-        public List<Type> Types
-        {
-            get { return types; }
-        }
-
-        /// <summary>
         /// A list of available subtypes of the selected type to filter search results
         /// </summary>
         public List<Subtype> SubTypes
         {
             get { return subtypes; }
-        }
-
-        /// <summary>
-        /// A list of available rarity levels to filter search results
-        /// </summary>
-        public List<Rarity> Rarities
-        {
-            get { return rarities; }
         }
 
         /// <summary>
@@ -87,34 +70,10 @@ namespace BlackLionTrader
             get { return maxLvl; }
         }
 
-        public SearchModel(JsonHelper jsonHelper)
+        public SearchModel(JsonHelper jsonHelper, CommonResources resources)
         {
             this.jsonHelper = jsonHelper;
-            try
-            {
-                setup();
-            }
-            catch(Exception e)
-            {
-                throw e;
-            }
-        }
-
-        /// <summary>
-        /// Initial setup of data members
-        /// </summary>
-        private void setup()
-        {
-            try
-            {
-                types = jsonHelper.getTypes();
-                rarities = jsonHelper.getRarities();
-                rarities.Insert(0, new Rarity(-1, "Any"));
-            }
-            catch(Exception e)
-            {
-                throw e;
-            }
+            this.resources = resources;
         }
 
         /// <summary>
@@ -132,7 +91,7 @@ namespace BlackLionTrader
             }
             else
             {
-                currentType = types[id];
+                currentType = resources.getType(id);
                 subtypes = currentType.Subtypes;
             }
         }
@@ -167,7 +126,7 @@ namespace BlackLionTrader
             }
             else
             {
-                currentRarity = rarities[id];
+                currentRarity = resources.getRarity(id);
             }
         }
 

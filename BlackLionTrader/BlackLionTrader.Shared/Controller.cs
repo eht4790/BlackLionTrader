@@ -33,13 +33,15 @@ namespace BlackLionTrader
         private WatchModel watchModel;
         private GemsModel gemModel;
         private JsonHelper jsonHelper;
+        private CommonResources resources;
 
         public Controller()
         {
             try
             {
                 jsonHelper = new JsonHelper();
-                searchModel = new SearchModel(jsonHelper);
+                resources = new CommonResources(jsonHelper);
+                searchModel = new SearchModel(jsonHelper, resources);
                 watchModel = new WatchModel(jsonHelper);
                 gemModel = new GemsModel(jsonHelper);
             }
@@ -56,7 +58,7 @@ namespace BlackLionTrader
         public List<string> getTypesAsString()
         {
             List<string> types = new List<string>();
-            foreach(Type type in searchModel.Types)
+            foreach(Type type in resources.Types)
             {
                 types.Add(type.Name);
             }
@@ -84,7 +86,7 @@ namespace BlackLionTrader
         public List<Rarity> getRarities()
         {
             List<Rarity> rarities = new List<Rarity>();
-            foreach(Rarity rarity in searchModel.Rarities)
+            foreach(Rarity rarity in resources.Rarities)
             {
                 rarities.Add(rarity);
             }
