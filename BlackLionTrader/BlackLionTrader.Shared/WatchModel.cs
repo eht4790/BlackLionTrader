@@ -28,11 +28,63 @@ namespace BlackLionTrader
     public class WatchModel
     {
         private JsonHelper jsonHelper;
+        private CommonResources resources;
+
+        private List<Subtype> subtypes;
+        
+        private Type currentType;
+        private Subtype currentSubtype;
+        private Rarity currentRarity;
+
+        private int minLvl = 0;
+        private int maxLvl = 80;
+
         private Dictionary<int, Item> favorites = new Dictionary<int, Item>();
 
-        public WatchModel(JsonHelper jsonHelper)
+        /// <summary>
+        /// The currently selected Type to filter favorites by
+        /// </summary>
+        public Type CurrentType
+        {
+            get { return currentType; }
+        }
+
+        /// <summary>
+        /// The currently selected Subtype to filter favorites by
+        /// </summary>
+        public Subtype CurrentSubtype
+        {
+            get { return CurrentSubtype; }
+        }
+
+        /// <summary>
+        /// The currently selected Rarity to filter favorites by
+        /// </summary>
+        public Rarity CurrentRarity
+        {
+            get { return currentRarity; }
+        }
+
+        /// <summary>
+        /// The current minimum level of an item to filter favorites by
+        /// </summary>
+        public int MinLvl
+        {
+            get { return minLvl; }
+        }
+
+        /// <summary>
+        /// The current maximum level of an item to filter favorites by
+        /// </summary>
+        public int MaxLvl
+        {
+            get { return maxLvl; }
+        }
+
+        public WatchModel(JsonHelper jsonHelper, CommonResources resources)
         {
             this.jsonHelper = jsonHelper;
+            this.resources = resources;
         }
 
         /// <summary>
