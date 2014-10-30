@@ -88,6 +88,110 @@ namespace BlackLionTrader
         }
 
         /// <summary>
+        /// Set currentType to the Type of the given id and updates the subtypes list.
+        /// If id equals -1 restore to default.
+        /// </summary>
+        /// <param name="id">The id of the new currently selected Type</param>
+        public void changeType(int id)
+        {
+            if (id == -1)
+            {
+                currentType = null;
+                currentSubtype = null;
+                subtypes = new List<Subtype>();
+            }
+            else
+            {
+                currentType = resources.getType(id);
+                subtypes = currentType.Subtypes;
+            }
+        }
+
+        /// <summary>
+        /// Set currentSubtype to the Subtype of the given id.
+        /// If id equals - 1 restore to default.
+        /// </summary>
+        /// <param name="id">The id of the new currently selected Subtype</param>
+        public void changeSubtype(int id)
+        {
+            if (id == -1)
+            {
+                currentSubtype = null;
+            }
+            else
+            {
+                currentSubtype = subtypes[id];
+            }
+        }
+
+        /// <summary>
+        /// Set currentRarity to the Rarity of the given id.
+        /// If id equals -1 restore to default.
+        /// </summary>
+        /// <param name="id"></param>
+        public void changeRarity(int id)
+        {
+            if (id == 0)
+            {
+                currentRarity = null;
+            }
+            else
+            {
+                currentRarity = resources.getRarity(id);
+            }
+        }
+
+        /// <summary>
+        /// Sets the minimum level to the given value. If the given value 
+        /// is less than 1 it defaults to 1. If greater than the max lvl it
+        /// defaults to match the maxLvl;
+        /// </summary>
+        /// <param name="lvl">The desired value for minLvl</param>
+        public void changeMinLvl(int lvl)
+        {
+            if (lvl > 0)
+            {
+                if (lvl <= maxLvl)
+                {
+                    minLvl = lvl;
+                }
+                else
+                {
+                    minLvl = maxLvl;
+                }
+            }
+            else
+            {
+                minLvl = 1;
+            }
+        }
+
+        /// <summary>
+        /// Sets the maximum level to the given value. If the given value 
+        /// is greater than 80 it defaults to 80. If less than the min lvl it
+        /// defaults to match the minLvl;
+        /// </summary>
+        /// <param name="lvl">The desired value for minLvl</param>
+        public void changeMaxLvl(int lvl)
+        {
+            if (lvl <= 80)
+            {
+                if (lvl >= minLvl)
+                {
+                    maxLvl = lvl;
+                }
+                else
+                {
+                    maxLvl = minLvl;
+                }
+            }
+            else
+            {
+                maxLvl = 80;
+            }
+        }
+
+        /// <summary>
         /// Adds the given item to the favorites Dictionary
         /// </summary>
         /// <param name="item">The Item object to be added</param>
