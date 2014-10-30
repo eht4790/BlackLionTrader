@@ -69,7 +69,7 @@ namespace BlackLionTrader
         /// Gets a list of Subtype names for the UI
         /// </summary>
         /// <returns>A List of strings of all Subtype names</returns>
-        public List<string> getSubtypesAsString()
+        public List<string> getSearchSubtypesAsString()
         {
             List<string> subtypes = new List<string>();
             foreach(Subtype subtype in searchModel.SubTypes)
@@ -97,7 +97,7 @@ namespace BlackLionTrader
         /// Change the current Type in the searchModel
         /// </summary>
         /// <param name="id">The id of the selected Type</param>
-        public void setType(int id)
+        public void setSearchType(int id)
         {
             searchModel.changeType(id);
         }
@@ -106,7 +106,7 @@ namespace BlackLionTrader
         /// Change the current Subtype in the searchModel
         /// </summary>
         /// <param name="id">The id of the selected Subtype</param>
-        public void setSubtype(int id)
+        public void setSearchSubtype(int id)
         {
             searchModel.changeSubtype(id);
         }
@@ -115,7 +115,7 @@ namespace BlackLionTrader
         /// Change the current Rarity in the searchModel
         /// </summary>
         /// <param name="id">The id of the selected Rarity</param>
-        public void setRarity(int id)
+        public void setSearchRarity(int id)
         {
             searchModel.changeRarity(id);
         }
@@ -124,7 +124,7 @@ namespace BlackLionTrader
         /// Change the current Minimum Level in the searchModel
         /// </summary>
         /// <param name="lvl">The new minimum level</param>
-        public void setMinLvl(int lvl)
+        public void setSearchMinLvl(int lvl)
         {
             searchModel.changeMinLvl(lvl);
         }
@@ -133,7 +133,7 @@ namespace BlackLionTrader
         /// Gets the MinLvl stored in the SearchModel
         /// </summary>
         /// <returns>The minimum level for an item in search results</returns>
-        public int getMinLvl()
+        public int getSearchMinLvl()
         {
             return searchModel.MinLvl;
         }
@@ -142,7 +142,7 @@ namespace BlackLionTrader
         /// Gets the MaxLvl stored int he SearchModel
         /// </summary>
         /// <returns>The maximum level for an item in search results</returns>
-        public int getMaxLvl()
+        public int getSearchMaxLvl()
         {
             return searchModel.MaxLvl;
         }
@@ -151,7 +151,7 @@ namespace BlackLionTrader
         /// Change the current Maximum Level in the searchModel
         /// </summary>
         /// <param name="lvl">The new maximum level</param>
-        public void setMaxLvl(int lvl)
+        public void setSearchMaxLvl(int lvl)
         {
             searchModel.changeMaxLvl(lvl);
         }
