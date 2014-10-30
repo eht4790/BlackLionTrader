@@ -112,6 +112,9 @@ namespace BlackLionTrader
             get { return items; }
         }
 
+        /// <summary>
+        /// This list of favorite items displayed in the Watch hubsection
+        /// </summary>
         public ObservableCollection<DisplayItem> WatchItems
         {
             get { return watchItems; }
@@ -362,14 +365,14 @@ namespace BlackLionTrader
                 try
                 {
                     int lvl = Int32.Parse(lvlBox.Text);
-                    app.controller.setMinLvl(lvl);
-                    lvlBox.Text = app.controller.getMinLvl().ToString();
+                    app.controller.setSearchMinLvl(lvl);
+                    lvlBox.Text = app.controller.getSearchMinLvl().ToString();
                 }
                 catch (FormatException)
                 {
                     lvlBox.Text = "Min Lvl";
                     lvlBox.Foreground = new SolidColorBrush(Colors.Gray);
-                    app.controller.setMinLvl(0);
+                    app.controller.setSearchMinLvl(0);
                 }
             }
         }
@@ -393,14 +396,14 @@ namespace BlackLionTrader
                 try
                 {
                     int lvl = Int32.Parse(lvlBox.Text);
-                    app.controller.setMaxLvl(lvl);
-                    lvlBox.Text = app.controller.getMaxLvl().ToString();
+                    app.controller.setSearchMaxLvl(lvl);
+                    lvlBox.Text = app.controller.getSearchMaxLvl().ToString();
                 }
                 catch (FormatException)
                 {
                     lvlBox.Text = "Max Lvl";
                     lvlBox.Foreground = new SolidColorBrush(Colors.Gray);
-                    app.controller.setMaxLvl(80);
+                    app.controller.setSearchMaxLvl(80);
                 }
             }
         }
@@ -414,11 +417,11 @@ namespace BlackLionTrader
         private void TypeCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox typeBox = (ComboBox)sender;
-            app.controller.setType(typeBox.SelectedIndex - 1);
-            List<string> list = app.controller.getSubtypesAsString();
+            app.controller.setSearchType(typeBox.SelectedIndex - 1);
+            List<string> list = app.controller.getSearchSubtypesAsString();
             subtypes.Clear();
             subtypes.Add("Any");
-            app.controller.setSubtype(-1);
+            app.controller.setSearchSubtype(-1);
             foreach(string subtype in list)
             {
                 subtypes.Add(subtype);
@@ -439,11 +442,11 @@ namespace BlackLionTrader
             ComboBox subtypeBox = (ComboBox)sender;
             if (subtypeBox.SelectedIndex != -1)
             {
-                app.controller.setSubtype(subtypeBox.SelectedIndex - 1);
+                app.controller.setSearchSubtype(subtypeBox.SelectedIndex - 1);
             }
             else
             {
-                app.controller.setSubtype(subtypeBox.SelectedIndex);
+                app.controller.setSearchSubtype(subtypeBox.SelectedIndex);
             }
         }
 
@@ -455,7 +458,7 @@ namespace BlackLionTrader
         private void RarityCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox rarityBox = (ComboBox)sender;
-            app.controller.setRarity(rarityBox.SelectedIndex);
+            app.controller.setSearchRarity(rarityBox.SelectedIndex);
         }
 
         /// <summary>
