@@ -42,7 +42,7 @@ namespace BlackLionTrader
                 jsonHelper = new JsonHelper();
                 resources = new CommonResources(jsonHelper);
                 searchModel = new SearchModel(jsonHelper, resources);
-                watchModel = new WatchModel(jsonHelper);
+                watchModel = new WatchModel(jsonHelper, resources);
                 gemModel = new GemsModel(jsonHelper);
             }
             catch(AggregateException e)
