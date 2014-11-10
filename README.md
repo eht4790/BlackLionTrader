@@ -15,14 +15,14 @@ Current Goals
 -------------
 __Search Hub Section__
 
-1. Add Favorites Button functionality to items in ListBox
-2. Clicking an item in the results list navigates to an Item Page
+1. Clicking an item in the results list navigates to an Item Page
 
 __Watch Hub Section__
 
 1. Add searching of the favorites list
 2. Add filtering of the favorites list
 3. Add sorting of the favorites list
+4. Make favorites list persistant
 
 __Item Page__
 
